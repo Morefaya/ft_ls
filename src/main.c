@@ -6,7 +6,11 @@ int	main(int ac, char **av)
 	struct dirent	*fd_r;
 	
 	if (ac != 2)
+	{
+		errno = E2BIG;
+		ft_putendl(strerror(errno));
 		return (1);
+	}
 	if (!(fd_o = opendir(av[1])))
 		return (1);
 	while((fd_r = readdir(fd_o)))

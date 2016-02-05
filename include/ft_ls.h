@@ -3,6 +3,7 @@
 
 # include "libft.h"
 # include <dirent.h>
+# include <errno.h>
 
 typedef struct	s_ls
 {
