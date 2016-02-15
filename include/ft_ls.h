@@ -16,11 +16,17 @@
 # include "libft.h"
 # include <dirent.h>
 # include <errno.h>
+# include <sys/stat.h>
+# include <pwd.h>
+# include <grp.h>
+# include <time.h>
+# include <stdlib.h>
 
 typedef struct	s_ls
 {
 	char		*name;
-	int			nb_slink;
+	int		nb_hlink;
+	int		nb_blk;
 	char		type;
 	char		*rights;
 	char		*u_name;
@@ -28,5 +34,13 @@ typedef struct	s_ls
 	size_t		size;
 	char		*time;
 }				t_ls;
+
+char	*get_uname(uid_t uid);
+char	*get_gname(gid_t gid);
+char	*get_rights(struct stat *f_stat);
+char	get_type(struct stat *f_stat);
+char	*get_time(time_t time);
+
+/*fait une liste de liste pour laffichage ls sans l*/
 
 #endif
