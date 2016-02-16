@@ -6,7 +6,7 @@
 /*   By: jcazako <marvin@42.fr>                     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/02/13 13:38:00 by jcazako           #+#    #+#             */
-/*   Updated: 2016/02/13 17:23:12 by jcazako          ###   ########.fr       */
+/*   Updated: 2016/02/16 19:23:55 by jcazako          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -38,7 +38,7 @@ int	main(int ac, char **av)
 	}
 	if (!(name = get_time((time_t)(buff.st_mtime))))
 	{
-		ft_putendl("error get_gname");
+		ft_putendl("error get_time");
 		return (1);
 	}
 	ft_putendl(name);

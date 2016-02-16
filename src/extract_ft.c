@@ -32,7 +32,7 @@ char	*get_gname(gid_t gid)
 	return (grp);
 }
 
-char	*get_time(time_t time)
+/*char	*get_time(time_t time)
 {
 	char	*str_tmp;
 	char	*str;
@@ -42,7 +42,7 @@ char	*get_time(time_t time)
 	if (!(str = ft_strdup(str_tmp)))
 		return (NULL);
 	return (str);
-}
+}*/
 
 char	get_type(struct stat *f_stat)
 {
