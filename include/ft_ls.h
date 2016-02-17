@@ -21,6 +21,8 @@
 # include <grp.h>
 # include <time.h>
 # include <stdlib.h>
+# include <sys/acl.h>
+# include <sys/xattr.h>
 
 typedef struct	s_ls
 {
@@ -37,7 +39,7 @@ typedef struct	s_ls
 
 char	*get_uname(uid_t uid);
 char	*get_gname(gid_t gid);
-char	*get_rights(struct stat *f_stat);
+char	*get_rights(struct stat *f_stat, struct dirent *f_drt);
 char	get_type(struct stat *f_stat);
 char	*get_time(time_t time);
 
