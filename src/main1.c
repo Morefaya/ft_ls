@@ -20,6 +20,7 @@ int	main(int ac, char **av)
 	struct dirent	*fd_r;
 	struct stat	buff;
 	char		*name;
+	char		*path;
 
 	errno = 0;
 	if (ac != 2)
@@ -30,19 +31,26 @@ int	main(int ac, char **av)
 	}
 	if (!(fd_o = opendir(av[1])))
 		return (1);
-	fd_r = readdir(fd_o);
-	if (lstat((const char*)(fd_r->d_name), &buff) == -1)
+	while ((fd_r = readdir(fd_o)))
 	{
-		ft_putendl(strerror(errno));
-		return (1);
+		if (!(path = path_builder(av[1], fd_r->d_name)))
+			return (1);
+		if (lstat(path, &buff) == -1)
+		{
+			ft_putendl(strerror(errno));
+			return (1);
+		}
+		if (!(name = get_rights(&buff, path)))
+		{
+			ft_putendl("error get_rights");
+			return (1);
+		}
+		ft_putstr(name);
+		ft_putchar('\t');
+		ft_putendl(path);
+		free(path);
+		free(name);
 	}
-	if (!(name = get_time((time_t)(buff.st_mtime))))
-	{
-		ft_putendl("error get_time");
-		return (1);
-	}
-	ft_putendl(name);
-	free(name);
 	closedir(fd_o);
 	return (0);
 }

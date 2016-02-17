@@ -39,9 +39,10 @@ typedef struct	s_ls
 
 char	*get_uname(uid_t uid);
 char	*get_gname(gid_t gid);
-char	*get_rights(struct stat *f_stat, struct dirent *f_drt);
+char	*get_rights(struct stat *f_stat, char *path);
 char	get_type(struct stat *f_stat);
 char	*get_time(time_t time);
+char	*path_builder(char *path, char *dir_name);
 
 /*fait une liste de liste pour laffichage ls sans l*/
 
