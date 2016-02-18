@@ -6,7 +6,7 @@
 /*   By: jcazako <marvin@42.fr>                     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/02/13 13:38:00 by jcazako           #+#    #+#             */
-/*   Updated: 2016/02/16 19:23:55 by jcazako          ###   ########.fr       */
+/*   Updated: 2016/02/18 14:12:38 by jcazako          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,11 +16,11 @@
 
 int	main(int ac, char **av)
 {
-	DIR		*fd_o;
+	DIR				*fd_o;
 	struct dirent	*fd_r;
-	struct stat	buff;
-	char		*name;
-	char		*path;
+	struct stat		buff;
+	char			*name;
+	char			*path;
 
 	errno = 0;
 	if (ac != 2)

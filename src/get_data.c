@@ -6,13 +6,19 @@
 /*   By: jcazako <marvin@42.fr>                     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/02/06 20:19:34 by jcazako           #+#    #+#             */
-/*   Updated: 2016/02/18 13:00:24 by jcazako          ###   ########.fr       */
+/*   Updated: 2016/02/18 15:25:45 by jcazako          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "ft_ls.h"
 
-static void	free_content(t_ls *adr_content)
+void			*puterror(void)
+{
+	ft_putendl(strerror(errno));
+	return (NULL);
+}
+
+static void		free_content(t_ls *adr_content)
 {
 	free(adr_content->name);
 	free(adr_content->u_name);
@@ -21,25 +27,25 @@ static void	free_content(t_ls *adr_content)
 	free(adr_content->time);
 }
 
-static t_list	*get_link_list(struct dirent *f_dirent, struct stat *f_stat)
+static t_list	*get_link(struct dirent *f_drt, struct stat *f_stat, char *path)
 {
-	t_ls	content;
-	t_list	*lst;
+	t_ls			content;
+	t_list			*lst;
 
-	if (!f_stat || !f_dirent)
+	if (!f_stat || !f_drt)
 		return (NULL);
 	errno = 0;
 	content.nb_hlink = (int)(f_stat->st_nlink);
 	content.size = (int)(f_stat->st_size);
 	content.nb_blk = (int)(f_stat->st_blocks);
-	if (!(content.name = ft_strdup(f_dirent->d_name))
-		|| !(content.u_name = get_uname(st_uid))
-		|| !(content.g_name = get_gname(st_gid))
+	if (!(content.name = ft_strdup(f_drt->d_name))
+		|| !(content.u_name = get_uname(f_stat->st_uid))
+		|| !(content.g_name = get_gname(f_stat->st_gid))
 		|| !(content.rights = get_rights(f_stat, path))
 		|| !(content.type = get_type(f_stat))
-		|| !(content.time = get_time(st_mtime)))
+		|| !(content.time = get_time(f_stat->st_mtime)))
 		return (NULL);
-	if (!(lst = lst_new(&content, sizeof(content))))
+	if (!(lst = ft_lstnew(&content, sizeof(content))))
 	{
 		free_content(&content);
 		return (NULL);
@@ -47,21 +53,38 @@ static t_list	*get_link_list(struct dirent *f_dirent, struct stat *f_stat)
 	return (lst);
 }
 
-
-t_list		*get_data(t_list **list, DIR *f_dir)
+static t_list	*mk_link(char *arg, struct dirent *f_drt)
 {
-	t_list		*lst_tmp;
-	struct dirent	*f_dirent;
-	struct stat	*f_stat;
+	char			*path;
+	t_list			*lst;
+	struct stat		buff_stat;
+
+	if (!(path = path_builder(arg, f_drt->d_name)))
+		return (NULL);
+	if (lstat(path, &buff_stat) == -1)
+		return (puterror());
+	if (!(lst = get_link(f_drt, &buff_stat, path)))
+		return (NULL);
+	return (lst);
+}
+
+t_list			*get_data(char *arg)
+{
+	DIR				*f_opn;
+	struct dirent	*f_drt;
+	t_list			*lst_tmp;
+	t_list			*lst;
 
 	errno = 0;
-	while ((f_dirent = readdir(f_dir)))
+	lst = NULL;
+	if (!(f_opn = opendir(arg)))
+		return (puterror());
+	while ((f_drt = readdir(f_opn)))
 	{
-		if (lstat((const char*)(f_dirent->d_name), f_stat) == -1)
-		{
-			ft_putendl(strerror(errno));
+		if (!(lst_tmp = mk_link(arg, f_drt)))
 			return (NULL);
-		}
-		ft_lstadd(list, lst_tmp);
+		ft_lstadd(&lst, lst_tmp);
 	}
+	closedir(f_opn);
+	return (lst);
 }
