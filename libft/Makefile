@@ -22,7 +22,8 @@ ft_strnstr.c ft_strrchr.c ft_strsplit.c \
 ft_strstr.c ft_strsub.c ft_strtrim.c \
 ft_tolower.c ft_toupper.c ft_sqrt.c \
 ft_lstnew.c ft_lstdelone.c ft_lstdel.c \
-ft_lstadd.c ft_lstiter.c ft_lstmap.c
+ft_lstadd.c ft_lstiter.c ft_lstmap.c \
+ft_putstr_right.c ft_putstr_left.c
 SRC_DIR = ./src
 SRC_C = $(patsubst %, $(SRC_DIR)/%, $(SRC))
 OBJ = $(patsubst %.c, %.o, $(SRC))
