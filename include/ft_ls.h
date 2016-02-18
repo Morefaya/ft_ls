@@ -6,7 +6,7 @@
 /*   By: jcazako <marvin@42.fr>                     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/02/06 21:28:40 by jcazako           #+#    #+#             */
-/*   Updated: 2016/02/18 20:15:11 by jcazako          ###   ########.fr       */
+/*   Updated: 2016/02/18 21:28:57 by jcazako          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,6 +14,7 @@
 # define FT_LS_H
 
 # include "libft.h"
+# include <unistd.h>
 # include <dirent.h>
 # include <errno.h>
 # include <sys/stat.h>
@@ -24,9 +25,12 @@
 # include <sys/acl.h>
 # include <sys/xattr.h>
 
+# define BUFF_SIZE 1024
+
 typedef struct	s_ls
 {
 	char		*name;
+	char		*link;
 	int			nb_hlink;
 	int			nb_blk;
 	char		type;
@@ -50,7 +54,6 @@ int				max_width(t_list *lst);
 int				get_nblock(t_list *lst);
 
 void			print_lf(t_list* lst);
-
-/*fait une liste de liste pour l'affichage ls sans l*/
+void			*puterror(void);
 
 #endif

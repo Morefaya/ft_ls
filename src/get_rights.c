@@ -1,3 +1,15 @@
+/* ************************************************************************** */
+/*                                                                            */
+/*                                                        :::      ::::::::   */
+/*   get_rights.c                                       :+:      :+:    :+:   */
+/*                                                    +:+ +:+         +:+     */
+/*   By: jcazako <marvin@42.fr>                     +#+  +:+       +#+        */
+/*                                                +#+#+#+#+#+   +#+           */
+/*   Created: 2016/02/18 20:59:06 by jcazako           #+#    #+#             */
+/*   Updated: 2016/02/18 20:59:09 by jcazako          ###   ########.fr       */
+/*                                                                            */
+/* ************************************************************************** */
+
 #include "ft_ls.h"
 
 static void	check_sticky(char *rights, struct stat *f_stat)
@@ -27,7 +39,7 @@ static void	check_sticky(char *rights, struct stat *f_stat)
 
 static void	check_acl_extd(char *rights, char *path)
 {
-	char	buff[1024];
+	char	buff[BUFF_SIZE];
 	ssize_t	nb_xat;
 	acl_t	p_acl;
 
@@ -37,7 +49,7 @@ static void	check_acl_extd(char *rights, char *path)
 		acl_free((void*)p_acl);
 		rights[9] = '+';
 	}
-	if ((nb_xat = listxattr(path, buff, 1024, XATTR_NOFOLLOW)))
+	if ((nb_xat = listxattr(path, buff, BUFF_SIZE, XATTR_NOFOLLOW)))
 		rights[9] = '@';
 }
 

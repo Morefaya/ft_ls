@@ -6,13 +6,19 @@
 /*   By: jcazako <marvin@42.fr>                     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/02/18 18:54:18 by jcazako           #+#    #+#             */
-/*   Updated: 2016/02/18 20:02:59 by jcazako          ###   ########.fr       */
+/*   Updated: 2016/02/18 21:07:21 by jcazako          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "ft_ls.h"
 
-int	max_width(t_list *lst)
+void	*puterror(void)
+{
+	ft_putendl(strerror(errno));
+	return (NULL);
+}
+
+int		max_width(t_list *lst)
 {
 	char	*buff;
 	int		len;
@@ -31,9 +37,9 @@ int	max_width(t_list *lst)
 	return (max);
 }
 
-int	get_nblock(t_list *lst)
+int		get_nblock(t_list *lst)
 {
-	int	block;
+	int		block;
 
 	block = 0;
 	while (lst)

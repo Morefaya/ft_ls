@@ -6,25 +6,33 @@
 /*   By: jcazako <marvin@42.fr>                     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/02/06 20:19:34 by jcazako           #+#    #+#             */
-/*   Updated: 2016/02/18 15:25:45 by jcazako          ###   ########.fr       */
+/*   Updated: 2016/02/18 22:06:06 by jcazako          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "ft_ls.h"
 
-void			*puterror(void)
-{
-	ft_putendl(strerror(errno));
-	return (NULL);
-}
-
 static void		free_content(t_ls *adr_content)
 {
 	free(adr_content->name);
+	free(adr_content->link);
 	free(adr_content->u_name);
 	free(adr_content->g_name);
 	free(adr_content->rights);
 	free(adr_content->time);
+}
+
+static char		*f_readlink(t_ls content, char *path)
+{
+	char	*link;
+
+	if (!(link = ft_strnew(BUFF_SIZE)))
+		return (NULL);
+	if (content.type == 'l')
+		if (readlink(path, link, BUFF_SIZE) > 0)
+			return (link);
+	free(link);
+	return (NULL);
 }
 
 static t_list	*get_link(struct dirent *f_drt, struct stat *f_stat, char *path)
@@ -45,6 +53,7 @@ static t_list	*get_link(struct dirent *f_drt, struct stat *f_stat, char *path)
 		|| !(content.type = get_type(f_stat))
 		|| !(content.time = get_time(f_stat->st_mtime)))
 		return (NULL);
+	content.link = f_readlink(content, path);
 	if (!(lst = ft_lstnew(&content, sizeof(content))))
 	{
 		free_content(&content);

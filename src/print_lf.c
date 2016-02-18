@@ -6,11 +6,21 @@
 /*   By: jcazako <marvin@42.fr>                     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/02/18 16:49:47 by jcazako           #+#    #+#             */
-/*   Updated: 2016/02/18 18:55:54 by jcazako          ###   ########.fr       */
+/*   Updated: 2016/02/18 22:04:30 by jcazako          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "ft_ls.h"
+
+void	print_link(char *link)
+{
+	if (link)
+	{
+		ft_putstr(" -> ");
+		ft_putstr(link);
+	}
+	ft_putchar('\n');
+}
 
 void	print_lf(t_list *lst)
 {
@@ -23,7 +33,8 @@ void	print_lf(t_list *lst)
 		ft_putchar(' ');
 		ft_putstr(((t_ls*)(lst->content))->time);
 		ft_putchar(' ');
-		ft_putendl(((t_ls*)(lst->content))->name);
+		ft_putstr(((t_ls*)(lst->content))->name);
+		print_link(((t_ls*)(lst->content))->link);
 		lst = lst->next;
 	}
 }
