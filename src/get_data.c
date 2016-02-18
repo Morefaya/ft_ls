@@ -6,7 +6,7 @@
 /*   By: jcazako <marvin@42.fr>                     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/02/06 20:19:34 by jcazako           #+#    #+#             */
-/*   Updated: 2016/02/06 22:09:28 by jcazako          ###   ########.fr       */
+/*   Updated: 2016/02/18 13:00:24 by jcazako          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,6 +14,7 @@
 
 static void	free_content(t_ls *adr_content)
 {
+	free(adr_content->name);
 	free(adr_content->u_name);
 	free(adr_content->g_name);
 	free(adr_content->rights);
@@ -32,11 +33,11 @@ static t_list	*get_link_list(struct dirent *f_dirent, struct stat *f_stat)
 	content.size = (int)(f_stat->st_size);
 	content.nb_blk = (int)(f_stat->st_blocks);
 	if (!(content.name = ft_strdup(f_dirent->d_name))
-		|| !(content.u_name = get_uname(uid_t uid))
-		|| !(content.g_name = get_gname(gid_t gid))
-		|| !(content.rights = get_rights())
-		|| !(content.type = get_type())
-		|| !(content.time = get_time()))
+		|| !(content.u_name = get_uname(st_uid))
+		|| !(content.g_name = get_gname(st_gid))
+		|| !(content.rights = get_rights(f_stat, path))
+		|| !(content.type = get_type(f_stat))
+		|| !(content.time = get_time(st_mtime)))
 		return (NULL);
 	if (!(lst = lst_new(&content, sizeof(content))))
 	{

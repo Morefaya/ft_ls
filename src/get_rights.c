@@ -36,8 +36,13 @@ static void	check_acl_extd(char *rights, char *path)
 	rights[9] = (p_acl) ? '+' : ' ';
 	if ((nb_xat = listxattr(path, buff, 1024, XATTR_NOFOLLOW)) == -1)
 	{
-		ft_putendl(strerror(errno));
-		return;
+		if (errno != EPERM)
+		{
+			ft_putendl(strerror(errno));
+			return;
+		}
+		else
+			nb_xat = 0;
 	}
 	rights[9] = (nb_xat) ? '@' : ' ';
 }
