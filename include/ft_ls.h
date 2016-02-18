@@ -6,7 +6,7 @@
 /*   By: jcazako <marvin@42.fr>                     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/02/06 21:28:40 by jcazako           #+#    #+#             */
-/*   Updated: 2016/02/06 21:29:01 by jcazako          ###   ########.fr       */
+/*   Updated: 2016/02/18 16:59:00 by jcazako          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -43,6 +43,8 @@ char	*get_rights(struct stat *f_stat, char *path);
 char	get_type(struct stat *f_stat);
 char	*get_time(time_t time);
 char	*path_builder(char *path, char *dir_name);
+t_list	*get_data(char *arg);
+void	print_lf(t_list* lst);
 
 /*fait une liste de liste pour laffichage ls sans l*/
 
