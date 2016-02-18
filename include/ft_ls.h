@@ -6,7 +6,7 @@
 /*   By: jcazako <marvin@42.fr>                     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/02/06 21:28:40 by jcazako           #+#    #+#             */
-/*   Updated: 2016/02/18 16:59:00 by jcazako          ###   ########.fr       */
+/*   Updated: 2016/02/18 20:15:11 by jcazako          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -27,8 +27,8 @@
 typedef struct	s_ls
 {
 	char		*name;
-	int		nb_hlink;
-	int		nb_blk;
+	int			nb_hlink;
+	int			nb_blk;
 	char		type;
 	char		*rights;
 	char		*u_name;
@@ -37,15 +37,20 @@ typedef struct	s_ls
 	char		*time;
 }				t_ls;
 
-char	*get_uname(uid_t uid);
-char	*get_gname(gid_t gid);
-char	*get_rights(struct stat *f_stat, char *path);
-char	get_type(struct stat *f_stat);
-char	*get_time(time_t time);
-char	*path_builder(char *path, char *dir_name);
-t_list	*get_data(char *arg);
-void	print_lf(t_list* lst);
+char			*get_uname(uid_t uid);
+char			*get_gname(gid_t gid);
+char			*get_rights(struct stat *f_stat, char *path);
+char			get_type(struct stat *f_stat);
+char			*get_time(time_t time);
+t_list			*get_data(char *arg);
 
-/*fait une liste de liste pour laffichage ls sans l*/
+char			*path_builder(char *path, char *dir_name);
+
+int				max_width(t_list *lst);
+int				get_nblock(t_list *lst);
+
+void			print_lf(t_list* lst);
+
+/*fait une liste de liste pour l'affichage ls sans l*/
 
 #endif

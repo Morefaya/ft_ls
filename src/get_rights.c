@@ -32,19 +32,13 @@ static void	check_acl_extd(char *rights, char *path)
 	acl_t	p_acl;
 
 	errno = 0;
-	p_acl = acl_get_file(path, ACL_TYPE_EXTENDED);
-	rights[9] = (p_acl) ? '+' : ' ';
-	if ((nb_xat = listxattr(path, buff, 1024, XATTR_NOFOLLOW)) == -1)
+	if ((p_acl = acl_get_file(path, ACL_TYPE_EXTENDED)))
 	{
-		if (errno != EPERM)
-		{
-			ft_putendl(strerror(errno));
-			return;
-		}
-		else
-			nb_xat = 0;
+		acl_free((void*)p_acl);
+		rights[9] = '+';
 	}
-	rights[9] = (nb_xat) ? '@' : ' ';
+	if ((nb_xat = listxattr(path, buff, 1024, XATTR_NOFOLLOW)))
+		rights[9] = '@';
 }
 
 char		*get_rights(struct stat *f_stat, char *path)
@@ -62,6 +56,7 @@ char		*get_rights(struct stat *f_stat, char *path)
 	rights[6] = (f_stat->st_mode & S_IROTH) ? 'r' : '-';
 	rights[7] = (f_stat->st_mode & S_IWOTH) ? 'w' : '-';
 	rights[8] = (f_stat->st_mode & S_IXOTH) ? 'x' : '-';
+	rights[9] = ' ';
 	check_sticky(rights, f_stat);
 	check_acl_extd(rights, path);
 	return (rights);
