@@ -6,7 +6,7 @@
 /*   By: jcazako <marvin@42.fr>                     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/02/06 21:28:40 by jcazako           #+#    #+#             */
-/*   Updated: 2016/02/18 21:28:57 by jcazako          ###   ########.fr       */
+/*   Updated: 2016/02/19 18:21:05 by jcazako          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -41,6 +41,14 @@ typedef struct	s_ls
 	char		*time;
 }				t_ls;
 
+typedef struct	s_max
+{
+	int			mx_hl;
+	int			mx_sz;
+	int			mx_un;
+	int			mx_gn;
+}				t_max;
+
 char			*get_uname(uid_t uid);
 char			*get_gname(gid_t gid);
 char			*get_rights(struct stat *f_stat, char *path);
@@ -50,10 +58,16 @@ t_list			*get_data(char *arg);
 
 char			*path_builder(char *path, char *dir_name);
 
-int				max_width(t_list *lst);
+int				max_w_hlink(t_list *lst);
+int				max_w_size(t_list *lst);
+int				max_w_uname(t_list *lst);
+int				max_w_gname(t_list *lst);
+void			fill_tmax(t_max *max, t_list *lst);
+
+
 int				get_nblock(t_list *lst);
+void			*puterror(void);
 
 void			print_lf(t_list* lst);
-void			*puterror(void);
 
 #endif

@@ -1,32 +1,22 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   tool_list.c                                        :+:      :+:    :+:   */
+/*   ft_putendchar.c                                    :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: jcazako <marvin@42.fr>                     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2016/02/18 18:54:18 by jcazako           #+#    #+#             */
-/*   Updated: 2016/02/19 17:19:59 by jcazako          ###   ########.fr       */
+/*   Created: 2016/02/19 17:46:24 by jcazako           #+#    #+#             */
+/*   Updated: 2016/02/19 17:48:15 by jcazako          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "ft_ls.h"
+#include "libft.h"
 
-void	*puterror(void)
+void	ft_putendchar(char *str, char a)
 {
-	ft_putendl(strerror(errno));
-	return (NULL);
-}
-
-int		get_nblock(t_list *lst)
-{
-	int		block;
-
-	block = 0;
-	while (lst)
+	if (str)
 	{
-		block += ((t_ls*)(lst->content))->nb_blk;
-		lst = lst->next;
+		ft_putstr(str);
+		ft_putchar(a);
 	}
-	return (block);
 }
