@@ -6,7 +6,7 @@
 /*   By: jcazako <marvin@42.fr>                     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/02/06 21:28:40 by jcazako           #+#    #+#             */
-/*   Updated: 2016/02/19 18:21:05 by jcazako          ###   ########.fr       */
+/*   Updated: 2016/02/19 20:07:44 by jcazako          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -69,5 +69,7 @@ int				get_nblock(t_list *lst);
 void			*puterror(void);
 
 void			print_lf(t_list* lst);
+
+t_list			*sort(t_list *lst);
 
 #endif

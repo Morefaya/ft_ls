@@ -1,32 +1,40 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   main2.c                                            :+:      :+:    :+:   */
+/*   sort.c                                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: jcazako <marvin@42.fr>                     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2016/02/18 15:49:40 by jcazako           #+#    #+#             */
-/*   Updated: 2016/02/19 20:18:57 by jcazako          ###   ########.fr       */
+/*   Created: 2016/02/19 19:24:35 by jcazako           #+#    #+#             */
+/*   Updated: 2016/02/19 22:42:10 by jcazako          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "ft_ls.h"
 
-int	main(int ac, char **av)
+void	inverse_link(t_list **lst)
 {
-	t_list	*lst;
+	t_list *lst_tmp;
+	lst_tmp = *lst;
+}
 
-	if (ac != 2)
+t_list	*sort(t_list *lst)
+{
+	int	ret;
+
+	while (lst)
 	{
-		ft_putendl("too much arg");
-		return (1);
+		if (lst->next)
+		{
+			ret = 0;
+			if ((ret = ft_strcmp(((t_ls*)(lst->content))->name,
+				((t_ls*)(lst->next->content))->name)))
+				inverse_link(&lst);
+		}
+		lst = lst->next;
+		lst = lst ? lst->next : lst;
+		ft_putnbr(ret);
+		ft_putchar(' ');
 	}
-	if (!(lst = get_data(av[1])))
-	{
-		ft_putendl("error get_data");
-		return (1);
-	}
-	sort(lst);
-	print_lf(lst);
-	return (0);
+	return (lst);
 }
