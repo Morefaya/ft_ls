@@ -12,6 +12,17 @@
 
 #include "ft_ls.h"
 
+t_list	*get_adrlink(t_list *lst, int rang)
+{
+	while (rang--)
+	{
+		if (!lst)
+			return (NULL);
+		lst = lst->next;
+	}
+	return (lst);
+}
+
 int	main(int ac, char **av)
 {
 	t_list	*lst;
@@ -26,7 +37,13 @@ int	main(int ac, char **av)
 		ft_putendl("error get_data");
 		return (1);
 	}
-	sort(lst);
+	sort(&lst);
+	sort(&(lst->next->next));
+	sort(&(lst->next->next->next->next));
+	sort(&(lst->next->next->next->next->next->next));
+
+	/*tri a partir du 2 maillon plutot*/
 	print_lf(lst);
+	/*utilise une maillon buffer tete de lecture*/
 	return (0);
 }

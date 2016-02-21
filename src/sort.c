@@ -14,27 +14,23 @@
 
 void	inverse_link(t_list **lst)
 {
-	t_list *lst_tmp;
-	lst_tmp = *lst;
+	t_list	*lst_tmp1;
+	t_list	*lst_tmp2;
+
+	lst_tmp1 = *lst;
+	*lst = (*lst)->next;
+	lst_tmp2 = (*lst)->next;
+	(*lst)->next = lst_tmp1;
+	lst_tmp1->next = lst_tmp2;
+
 }
 
-t_list	*sort(t_list *lst)
+void	sort(t_list **lst)
 {
-	int	ret;
-
-	while (lst)
-	{
-		if (lst->next)
+	if ((*lst)->next)
+		if ((ft_strcmp(((t_ls*)((*lst)->content))->name,
+			((t_ls*)((*lst)->next->content))->name)) > 0)
 		{
-			ret = 0;
-			if ((ret = ft_strcmp(((t_ls*)(lst->content))->name,
-				((t_ls*)(lst->next->content))->name)))
-				inverse_link(&lst);
+			inverse_link(lst);
 		}
-		lst = lst->next;
-		lst = lst ? lst->next : lst;
-		ft_putnbr(ret);
-		ft_putchar(' ');
-	}
-	return (lst);
 }
