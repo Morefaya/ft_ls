@@ -71,5 +71,6 @@ void			*puterror(void);
 void			print_lf(t_list* lst);
 
 void			sort(t_list **lst);
+void			sort_ascii(t_list **l_files);
 
 #endif
