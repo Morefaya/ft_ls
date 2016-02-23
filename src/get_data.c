@@ -6,20 +6,18 @@
 /*   By: jcazako <marvin@42.fr>                     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/02/06 20:19:34 by jcazako           #+#    #+#             */
-/*   Updated: 2016/02/18 22:06:06 by jcazako          ###   ########.fr       */
+/*   Updated: 2016/02/23 22:11:37 by jcazako          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "ft_ls.h"
 
-static void		free_content(t_ls *adr_content)
+static void		time_inod(struct stat *f_stat, t_ls *content)
 {
-	free(adr_content->name);
-	free(adr_content->link);
-	free(adr_content->u_name);
-	free(adr_content->g_name);
-	free(adr_content->rights);
-	free(adr_content->time);
+	content->mtime = f_stat->st_mtime;
+	content->atime = f_stat->st_atime;
+	content->stime = f_stat->st_ctime;
+	content->n_inod = f_stat->st_ino;
 }
 
 static char		*f_readlink(t_ls content, char *path)
@@ -46,12 +44,12 @@ static t_list	*get_link(struct dirent *f_drt, struct stat *f_stat, char *path)
 	content.nb_hlink = (int)(f_stat->st_nlink);
 	content.size = (int)(f_stat->st_size);
 	content.nb_blk = (int)(f_stat->st_blocks);
+	time_inod(f_stat, &content);
 	if (!(content.name = ft_strdup(f_drt->d_name))
 		|| !(content.u_name = get_uname(f_stat->st_uid))
 		|| !(content.g_name = get_gname(f_stat->st_gid))
 		|| !(content.rights = get_rights(f_stat, path))
-		|| !(content.type = get_type(f_stat))
-		|| !(content.time = get_time(f_stat->st_mtime)))
+		|| !(content.type = get_type(f_stat)))
 		return (NULL);
 	content.link = f_readlink(content, path);
 	if (!(lst = ft_lstnew(&content, sizeof(content))))

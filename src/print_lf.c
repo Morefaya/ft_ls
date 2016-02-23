@@ -6,7 +6,7 @@
 /*   By: jcazako <marvin@42.fr>                     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/02/18 16:49:47 by jcazako           #+#    #+#             */
-/*   Updated: 2016/02/19 18:43:45 by jcazako          ###   ########.fr       */
+/*   Updated: 2016/02/23 22:10:49 by jcazako          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -22,6 +22,16 @@ void	print_link(char *link)
 	ft_putchar('\n');
 }
 
+void	print_time(time_t time)
+{
+	char	*str;
+
+	if (!(str = get_time(time)))
+		return;
+	ft_putendchar(str, ' ');
+	free(str);
+}
+
 void	putlf(t_list *lst, t_max buff)
 {
 	ft_putchar(((t_ls*)(lst->content))->type);
@@ -34,7 +44,7 @@ void	putlf(t_list *lst, t_max buff)
 	ft_putstr("  ");
 	ft_putstr_right(ft_itoa(((t_ls*)(lst->content))->size), buff.mx_sz);
 	ft_putchar(' ');
-	ft_putendchar(((t_ls*)(lst->content))->time, ' ');
+	print_time(((t_ls*)(lst->content))->mtime);
 	ft_putstr(((t_ls*)(lst->content))->name);
 	print_link(((t_ls*)(lst->content))->link);
 }

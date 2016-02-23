@@ -6,7 +6,7 @@
 /*   By: jcazako <marvin@42.fr>                     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/02/18 18:54:18 by jcazako           #+#    #+#             */
-/*   Updated: 2016/02/19 17:19:59 by jcazako          ###   ########.fr       */
+/*   Updated: 2016/02/23 21:31:37 by jcazako          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -29,4 +29,13 @@ int		get_nblock(t_list *lst)
 		lst = lst->next;
 	}
 	return (block);
+}
+
+void	free_content(t_ls *adr_content)
+{
+	free(adr_content->name);
+	free(adr_content->link);
+	free(adr_content->u_name);
+	free(adr_content->g_name);
+	free(adr_content->rights);
 }

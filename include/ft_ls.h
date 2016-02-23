@@ -6,7 +6,7 @@
 /*   By: jcazako <marvin@42.fr>                     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/02/06 21:28:40 by jcazako           #+#    #+#             */
-/*   Updated: 2016/02/23 19:38:23 by jcazako          ###   ########.fr       */
+/*   Updated: 2016/02/23 22:12:03 by jcazako          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -30,6 +30,7 @@
 typedef struct	s_ls
 {
 	char		*name;
+	ino_t		n_inod;
 	char		*link;
 	int			nb_hlink;
 	int			nb_blk;
@@ -38,7 +39,11 @@ typedef struct	s_ls
 	char		*u_name;
 	char		*g_name;
 	size_t		size;
-	char		*time;
+	time_t		atime;
+	time_t		mtime;
+	time_t		stime;
+	char		*attr;
+	char		*acl;
 }				t_ls;
 
 typedef struct	s_max
@@ -64,12 +69,16 @@ int				max_w_uname(t_list *lst);
 int				max_w_gname(t_list *lst);
 void			fill_tmax(t_max *max, t_list *lst);
 
-
 int				get_nblock(t_list *lst);
 void			*puterror(void);
+void			free_content(t_ls *adr_content);
 
 void			print_lf(t_list* lst);
 
 void			sort(t_list **lst, int (*f)(void*, void*));
+int				ascii_cmp(t_list *lst1, t_list *lst2);
+int				mtime_cmp(t_list *lst1, t_list *lst2);
+int				atime_cmp(t_list *lst1, t_list *lst2);
+int				stime_cmp(t_list *lst1, t_list *lst2);
 
 #endif
