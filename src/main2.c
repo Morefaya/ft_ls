@@ -6,7 +6,7 @@
 /*   By: jcazako <marvin@42.fr>                     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/02/18 15:49:40 by jcazako           #+#    #+#             */
-/*   Updated: 2016/02/19 20:18:57 by jcazako          ###   ########.fr       */
+/*   Updated: 2016/02/23 19:37:33 by jcazako          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -26,7 +26,7 @@ int	main(int ac, char **av)
 		ft_putendl("error get_data");
 		return (1);
 	}
-	sort_ascii(&lst);
+	sort(&lst, (int (*)(void*, void*))ft_strcmp);
 	print_lf(lst);
 	return (0);
 }
