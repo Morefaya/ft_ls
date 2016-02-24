@@ -6,7 +6,7 @@
 /*   By: jcazako <marvin@42.fr>                     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/02/06 21:28:40 by jcazako           #+#    #+#             */
-/*   Updated: 2016/02/23 22:12:03 by jcazako          ###   ########.fr       */
+/*   Updated: 2016/02/24 20:31:11 by jcazako          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -24,6 +24,7 @@
 # include <stdlib.h>
 # include <sys/acl.h>
 # include <sys/xattr.h>
+# include <sys/ioctl.h>
 
 # define BUFF_SIZE 1024
 
@@ -42,8 +43,6 @@ typedef struct	s_ls
 	time_t		atime;
 	time_t		mtime;
 	time_t		stime;
-	char		*attr;
-	char		*acl;
 }				t_ls;
 
 typedef struct	s_max
@@ -56,9 +55,13 @@ typedef struct	s_max
 
 char			*get_uname(uid_t uid);
 char			*get_gname(gid_t gid);
-char			*get_rights(struct stat *f_stat, char *path);
 char			get_type(struct stat *f_stat);
+char			*get_acl(char *path);
+
+char			*get_rights(struct stat *f_stat, char *path);
+
 char			*get_time(time_t time);
+
 t_list			*get_data(char *arg);
 
 char			*path_builder(char *path, char *dir_name);
@@ -72,6 +75,9 @@ void			fill_tmax(t_max *max, t_list *lst);
 int				get_nblock(t_list *lst);
 void			*puterror(void);
 void			free_content(t_ls *adr_content);
+int				count_elem_list(t_list *lst);
+
+void			print_ls(t_list* lst);
 
 void			print_lf(t_list* lst);
 

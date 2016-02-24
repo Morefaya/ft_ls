@@ -6,7 +6,7 @@
 /*   By: jcazako <marvin@42.fr>                     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/02/18 14:53:04 by jcazako           #+#    #+#             */
-/*   Updated: 2016/02/18 14:53:08 by jcazako          ###   ########.fr       */
+/*   Updated: 2016/02/24 14:20:39 by jcazako          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,7 +15,7 @@
 char	*get_uname(uid_t uid)
 {
 	struct passwd	*pwd;
-	char		*user;
+	char			*user;
 
 	errno = 0;
 	if (!(pwd = getpwuid(uid)))
@@ -31,7 +31,7 @@ char	*get_uname(uid_t uid)
 char	*get_gname(gid_t gid)
 {
 	struct group	*crew;
-	char		*grp;
+	char			*grp;
 
 	errno = 0;
 	if (!(crew = getgrgid(gid)))
@@ -44,26 +44,14 @@ char	*get_gname(gid_t gid)
 	return (grp);
 }
 
-/*char	*get_time(time_t time)
-{
-	char	*str_tmp;
-	char	*str;
-
-	if (!(str_tmp = ctime(&time)))
-		return (NULL);
-	if (!(str = ft_strdup(str_tmp)))
-		return (NULL);
-	return (str);
-}*/
-
 char	get_type(struct stat *f_stat)
 {
 	if (((f_stat->st_mode) & S_IFMT) == S_IFBLK)
 		return ('b');
 	if (((f_stat->st_mode) & S_IFMT) == S_IFCHR)
-		return ('c');	
+		return ('c');
 	if (((f_stat->st_mode) & S_IFMT) == S_IFDIR)
-		return ('d');	
+		return ('d');
 	if (((f_stat->st_mode) & S_IFMT) == S_IFIFO)
 		return ('p');
 	if (((f_stat->st_mode) & S_IFMT) == S_IFLNK)

@@ -6,7 +6,7 @@
 /*   By: jcazako <marvin@42.fr>                     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/02/18 18:54:18 by jcazako           #+#    #+#             */
-/*   Updated: 2016/02/23 21:31:37 by jcazako          ###   ########.fr       */
+/*   Updated: 2016/02/24 15:55:43 by jcazako          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -38,4 +38,13 @@ void	free_content(t_ls *adr_content)
 	free(adr_content->u_name);
 	free(adr_content->g_name);
 	free(adr_content->rights);
+}
+
+int		count_elem_list(t_list *lst)
+{
+	if (lst)
+	{
+		return (1 + count_elem_list(lst->next));
+	}
+	return (0);
 }
