@@ -6,7 +6,7 @@
 /*   By: jcazako <marvin@42.fr>                     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/02/24 18:16:15 by jcazako           #+#    #+#             */
-/*   Updated: 2016/02/24 21:55:45 by jcazako          ###   ########.fr       */
+/*   Updated: 2016/02/24 22:08:09 by jcazako          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -36,10 +36,12 @@ static t_list	*split(t_list *lst, int ocr)
 	t_list	*aux;
 	int		i;
 
-	while (ocr--)
+	i = 0;
+	while (i <= ocr)
 	{
 		put_ls(get_next_link(lst, ocr));
 		lst = lst->next;
+		i++;
 	}
 }
 
