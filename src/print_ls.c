@@ -12,12 +12,12 @@
 
 #include "ft_ls.h"
 
-static int		get_colwidth(t_list *lst)
+static int	get_colwidth(t_list *lst)
 {
 	int	width;
 
-	width = max_w_uname(lst)  + 1;
-	return (width + 8 - width % 8);
+	width = max_w_uname(lst);
+	return (width - width % 8);
 }
 
 static t_list	*get_next_link(t_list *lst, int ocr)
@@ -31,25 +31,38 @@ static t_list	*get_next_link(t_list *lst, int ocr)
 	return (lst);
 }
 
-static t_list	*split(t_list *lst, int ocr)
+static void	put_ls(t_list *lst, int ocr, int max_w)
 {
 	t_list	*aux;
-	int		i;
 
-	i = 0;
-	while (i <= ocr)
-	{
-		put_ls(get_next_link(lst, ocr));
-		lst = lst->next;
-		i++;
-	}
+	aux = get_next_link(lst, ocr);
+	if (!lst)
+		return;
+	ft_putstr_left(((t_ls*)(lst->content))->name, max_w);
+	put_ls(aux, ocr, max_w);
 }
 
-void			print_ls(t_list *lst)
+static void	split_ls(t_list *lst, int ocr)
+{
+	int	i;
+	int	max_w;
+
+	i = 0;
+	max_w = get_colwidth(lst);
+	while (i < ocr)
+	{
+		put_ls(lst, ocr, max_w);
+		lst = lst->next;
+		i++;
+		ft_putchar('\n');
+	}
+} 
+
+void		print_ls(t_list *lst)
 {
 	struct winsize	ws;
-	int				width;
-	int				i;
+	int		width;
+	int		i;
 
 	i = 1;
 	errno = 0;
@@ -61,6 +74,5 @@ void			print_ls(t_list *lst)
 	width = count_elem_list(lst) * get_colwidth(lst);
 	while (((width / i) >= ws.ws_col))
 		i++;
-	i--;
-	ft_putnbr(i);
+	split_ls(lst, i);
 }
