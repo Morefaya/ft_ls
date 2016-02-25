@@ -6,7 +6,7 @@
 /*   By: jcazako <marvin@42.fr>                     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/02/06 21:28:40 by jcazako           #+#    #+#             */
-/*   Updated: 2016/02/24 20:31:11 by jcazako          ###   ########.fr       */
+/*   Updated: 2016/02/25 20:39:31 by jcazako          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -31,7 +31,6 @@
 typedef struct	s_ls
 {
 	char		*name;
-	ino_t		n_inod;
 	char		*link;
 	int			nb_hlink;
 	int			nb_blk;
@@ -87,5 +86,7 @@ int				ascii_cmp(t_list *lst1, t_list *lst2);
 int				mtime_cmp(t_list *lst1, t_list *lst2);
 int				atime_cmp(t_list *lst1, t_list *lst2);
 int				stime_cmp(t_list *lst1, t_list *lst2);
+
+void			rev_list(t_list **lst);
 
 #endif

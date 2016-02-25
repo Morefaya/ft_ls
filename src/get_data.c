@@ -6,18 +6,17 @@
 /*   By: jcazako <marvin@42.fr>                     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/02/06 20:19:34 by jcazako           #+#    #+#             */
-/*   Updated: 2016/02/24 14:19:36 by jcazako          ###   ########.fr       */
+/*   Updated: 2016/02/25 20:09:25 by jcazako          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "ft_ls.h"
 
-static void		time_inod(struct stat *f_stat, t_ls *content)
+static void		time_asm(struct stat *f_stat, t_ls *content)
 {
 	content->mtime = f_stat->st_mtime;
 	content->atime = f_stat->st_atime;
 	content->stime = f_stat->st_ctime;
-	content->n_inod = f_stat->st_ino;
 }
 
 static char		*f_readlink(t_ls content, char *path)
@@ -44,7 +43,7 @@ static t_list	*get_link(struct dirent *f_drt, struct stat *f_stat, char *path)
 	content.nb_hlink = (int)(f_stat->st_nlink);
 	content.size = (int)(f_stat->st_size);
 	content.nb_blk = (int)(f_stat->st_blocks);
-	time_inod(f_stat, &content);
+	time_asm(f_stat, &content);
 	if (!(content.name = ft_strdup(f_drt->d_name))
 		|| !(content.u_name = get_uname(f_stat->st_uid))
 		|| !(content.g_name = get_gname(f_stat->st_gid))

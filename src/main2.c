@@ -6,7 +6,7 @@
 /*   By: jcazako <marvin@42.fr>                     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/02/18 15:49:40 by jcazako           #+#    #+#             */
-/*   Updated: 2016/02/24 20:29:57 by jcazako          ###   ########.fr       */
+/*   Updated: 2016/02/25 21:47:48 by jcazako          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -27,6 +27,7 @@ int	main(int ac, char **av)
 		return (1);
 	}
 	sort(&lst, (int (*)(void*, void*))ft_strcmp);
+	rev_list(&lst);
 	print_ls(lst);
 	return (0);
 }
