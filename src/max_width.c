@@ -80,6 +80,21 @@ int		max_w_gname(t_list *lst)
 	return (max);
 }
 
+int		max_w_name(t_list *lst)
+{
+	int	len;
+	int	max;
+
+	max = 0;
+	while (lst)
+	{
+		len = ft_strlen(((t_ls*)(lst->content))->name);
+		max = (len > max) ? len : max;
+		lst = lst->next;
+	}
+	return (max);
+}
+
 void	fill_tmax(t_max *max, t_list *lst)
 {
 	max->mx_hl = max_w_hlink(lst);
@@ -87,17 +102,3 @@ void	fill_tmax(t_max *max, t_list *lst)
 	max->mx_un = max_w_uname(lst);
 	max->mx_gn = max_w_gname(lst);
 }
-
-
-
-
-
-
-
-
-
-
-
-
-
-

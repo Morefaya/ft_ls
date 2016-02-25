@@ -70,6 +70,7 @@ int				max_w_hlink(t_list *lst);
 int				max_w_size(t_list *lst);
 int				max_w_uname(t_list *lst);
 int				max_w_gname(t_list *lst);
+int				max_w_name(t_list *lst);
 void			fill_tmax(t_max *max, t_list *lst);
 
 int				get_nblock(t_list *lst);
