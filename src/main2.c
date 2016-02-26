@@ -26,8 +26,7 @@ int	main(int ac, char **av)
 		ft_putendl("error get_data");
 		return (1);
 	}
-	sort(&lst, (int (*)(void*, void*))ft_strcmp);
-	rev_list(&lst);
+	sort(&lst, (int (*)(void*, void*))atime_cmp);
 	print_ls(lst);
 	return (0);
 }

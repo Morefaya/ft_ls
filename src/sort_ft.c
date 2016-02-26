@@ -12,23 +12,22 @@
 
 #include "ft_ls.h"
 
-int	ascii_cmp(t_list *lst1, t_list *lst2)
+int	ascii_cmp(char *str1, char *str2)
 {
-	return (ft_strcmp(((t_ls*)(lst1->content))->name,
-		((t_ls*)(lst2->content))->name));
+	return (ft_strcmp(str1, str2));
 }
 
-int	mtime_cmp(t_list *lst1, t_list *lst2)
+int	mtime_cmp(time_t t1, time_t t2)
 {
-	return (((t_ls*)(lst1->content))->mtime - ((t_ls*)(lst2->content))->mtime);
+	return ((int)(t1 - t2));
 }
 
-int	atime_cmp(t_list *lst1, t_list *lst2)
+int	atime_cmp(time_t t1, time_t t2)
 {
-	return (((t_ls*)(lst1->content))->atime - ((t_ls*)(lst2->content))->atime);
+	return ((int)(t1 - t2));
 }
 
-int	stime_cmp(t_list *lst1, t_list *lst2)
+int	stime_cmp(time_t t1, time_t t2)
 {
-	return (((t_ls*)(lst1->content))->stime - ((t_ls*)(lst2->content))->stime);
+	return ((int)(t1 - t2));
 }

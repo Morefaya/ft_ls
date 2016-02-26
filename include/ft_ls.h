@@ -82,10 +82,10 @@ void			print_ls(t_list* lst);
 void			print_lf(t_list* lst);
 
 void			sort(t_list **lst, int (*f)(void*, void*));
-int				ascii_cmp(t_list *lst1, t_list *lst2);
-int				mtime_cmp(t_list *lst1, t_list *lst2);
-int				atime_cmp(t_list *lst1, t_list *lst2);
-int				stime_cmp(t_list *lst1, t_list *lst2);
+int				ascii_cmp(char *str1, char *str2);
+int				mtime_cmp(time_t t1, time_t t2);
+int				atime_cmp(time_t t1, time_t t2);
+int				stime_cmp(time_t t1, time_t t2);
 
 void			rev_list(t_list **lst);
 
