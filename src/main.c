@@ -1,52 +1,66 @@
-/* ************************************************************************** */
-/*                                                                            */
-/*                                                        :::      ::::::::   */
-/*   main.c                                             :+:      :+:    :+:   */
-/*                                                    +:+ +:+         +:+     */
-/*   By: jcazako <marvin@42.fr>                     +#+  +:+       +#+        */
-/*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2016/02/13 13:38:00 by jcazako           #+#    #+#             */
-/*   Updated: 2016/02/13 17:23:12 by jcazako          ###   ########.fr       */
-/*                                                                            */
-/* ************************************************************************** */
-
 #include "ft_ls.h"
-#include <sys/ioctl.h>
-#include <stdio.h>
-
-int	main(int ac, char **av)
+static void	init_opt(t_opt *opt)
 {
-	DIR				*fd_o;
-	struct dirent	*fd_r;
-	struct winsize	ws;
+	opt->l = 0;
+	opt->R = 0;
+	opt->a = 0;
+	opt->r = 0;
+	opt->t = 0;
+	opt->A = 0;
+	opt->u = 0;
+	opt->c = 0;
+	opt->g = 0;
+	opt->one = 0;
+	opt->S = 0;
+}
+static void	fill_opt(char a, t_opt *opt)
+{
+}
 
-	errno = 0;
-	if (ac != 2)
+static void	pars_opt(char *str, t_opt *opt)
+{
+	int	i;
+
+	i = 1;
+	while (str[i])
 	{
-		errno = E2BIG;
-		ft_putendl(strerror(errno));
-		return (1);
+		if (!ft_strchr(OPT_CHARS, str[i]))
+		{
+			putillegal(str[i]);
+			exit(1);
+		}
+		else
+			fill_opt(str[i], opt);
+		i++;
 	}
-	if (!(fd_o = opendir(av[1])))
-		return (1);
-	fd_r = readdir(fd_o);
-	/*if ((ioctl(1, TIOCSETD, &line) == -1))
+}
+
+static int	check_opt(int ac, char **av, t_opt *opt)
+{
+	int	i;
+
+	i = 1;
+	init_opt(opt);
+	while (i < ac && av[i][0] == '-')
 	{
-		ft_putendl(strerror(errno));
-		ft_putchar('@');
-		return (1);
-	}*/
-	if ((ioctl(1, TIOCGWINSZ, &ws) == -1))
-	{
-		ft_putendl(strerror(errno));
-		return (1);
+		pars_opt(av[i], opt);
+		i++;
 	}
-	printf("%d\n", ws.ws_col);
-	/*while((fd_r = readdir(fd_o)))
+	return (i);
+}
+
+int		main(int ac, char **av)
+{
+	t_opt	opt;
+	int	index;
+
+	index = check_opt(av, &index, &opt);
+	if (index == ac + 1)
+		ft_ls(".", opt);
+	while (index < ac)
 	{
-		ft_putstr(fd_r->d_name);
-		ft_putchar('\n');
-	}*/
-	closedir(fd_o);
+		ft_ls(av[index], opt);
+		index++;
+	}
 	return (0);
 }

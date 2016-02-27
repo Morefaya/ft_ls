@@ -27,66 +27,81 @@
 # include <sys/ioctl.h>
 
 # define BUFF_SIZE 1024
+# define OPT_CHARS "larRtA1ugcS"
 
 typedef struct	s_ls
 {
-	char		*name;
-	char		*link;
-	int			nb_hlink;
-	int			nb_blk;
-	char		type;
-	char		*rights;
-	char		*u_name;
-	char		*g_name;
-	size_t		size;
-	time_t		atime;
-	time_t		mtime;
-	time_t		stime;
-}				t_ls;
+	char	*name;
+	char	*link;
+	int	nb_hlink;
+	int	nb_blk;
+	char	type;
+	char	*rights;
+	char	*u_name;
+	char	*g_name;
+	size_t	size;
+	time_t	atime;
+	time_t	mtime;
+	time_t	stime;
+}		t_ls;
 
 typedef struct	s_max
 {
-	int			mx_hl;
-	int			mx_sz;
-	int			mx_un;
-	int			mx_gn;
-}				t_max;
+	int	mx_hl;
+	int	mx_sz;
+	int	mx_un;
+	int	mx_gn;
+}		t_max;
 
-char			*get_uname(uid_t uid);
-char			*get_gname(gid_t gid);
-char			get_type(struct stat *f_stat);
-char			*get_acl(char *path);
+typedef struct	s_opt
+{
+	int	l;
+	int	R;
+	int	a;
+	int	r;
+	int	t;
+	int	A;
+	int	u;
+	int	c;
+	int	g;
+	int	one;
+	int	S;
+}		t_opt;
 
-char			*get_rights(struct stat *f_stat, char *path);
 
-char			*get_time(time_t time);
+char		*get_uname(uid_t uid);
+char		*get_gname(gid_t gid);
+char		get_type(struct stat *f_stat);
+char		*get_acl(char *path);
 
-t_list			*get_data(char *arg);
+char		*get_rights(struct stat *f_stat, char *path);
 
-char			*path_builder(char *path, char *dir_name);
+char		*get_time(time_t time);
 
-int				max_w_hlink(t_list *lst);
-int				max_w_size(t_list *lst);
-int				max_w_uname(t_list *lst);
-int				max_w_gname(t_list *lst);
-int				max_w_name(t_list *lst);
-void			fill_tmax(t_max *max, t_list *lst);
+t_list		*get_data(char *arg);
 
-int				get_nblock(t_list *lst);
-void			*puterror(void);
-void			free_content(t_ls *adr_content);
-int				count_elem_list(t_list *lst);
+char		*path_builder(char *path, char *dir_name);
 
-void			print_ls(t_list* lst);
+int		max_w_hlink(t_list *lst);
+int		max_w_size(t_list *lst);
+int		max_w_uname(t_list *lst);
+int		max_w_gname(t_list *lst);
+int		max_w_name(t_list *lst);
+void		fill_tmax(t_max *max, t_list *lst);
 
-void			print_lf(t_list* lst);
+int		get_nblock(t_list *lst);
+void		*puterror(void);
+void		free_content(t_ls *adr_content);
+int		count_elem_list(t_list *lst);
 
-void			sort(t_list **lst, int (*f)(void*, void*));
-int				ascii_cmp(char *str1, char *str2);
-int				mtime_cmp(time_t t1, time_t t2);
-int				atime_cmp(time_t t1, time_t t2);
-int				stime_cmp(time_t t1, time_t t2);
+void		print_ls(t_list* lst);
 
-void			rev_list(t_list **lst);
+void		print_lf(t_list* lst);
+
+void		sort(t_list **lst, int (*f)(void*, void*));
+int		ascii_cmp(char *str1, char *str2);
+int		mtime_cmp(time_t t1, time_t t2);
+int		atime_cmp(time_t t1, time_t t2);
+int		stime_cmp(time_t t1, time_t t2);
 
 #endif

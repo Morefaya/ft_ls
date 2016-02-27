@@ -2,7 +2,7 @@ CC = gcc
 CFLAG = -Wall -Wextra -Werror -g
 SRC = main2.c extract_ft.c get_time.c get_rights.c get_data.c \
 path_builder.c print_lf.c tool_list.c max_width.c sort.c \
-print_ls.c reverse.c sort_ft.c
+print_ls.c  sort_ft.c
 SRC_DIR = ./src
 SRC_C = $(patsubst %, $(SRC_DIR)/%, $(SRC))
 OBJ = $(patsubst %.c, %.o, $(SRC))
