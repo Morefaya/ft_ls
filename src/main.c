@@ -15,6 +15,28 @@ static void	init_opt(t_opt *opt)
 }
 static void	fill_opt(char a, t_opt *opt)
 {
+	if (a == 'l')
+		opt->l = 1;
+	if (a == 'R')
+		opt->R = 1;
+	if (a == 'a')
+		opt->a = 1;
+	if (a == 'r')
+		opt->r = 1;
+	if (a == 't')
+		opt->t = 1;
+	if (a == 'A')
+		opt->A = 1;
+	if (a == 'u')
+		opt->u = 1;
+	if (a == 'c')
+		opt->c = 1;
+	if (a == 'g')
+		opt->g = 1;
+	if (a == '1')
+		opt->one = 1;
+	if (a == 'S')
+		opt->S = 1;
 }
 
 static void	pars_opt(char *str, t_opt *opt)
