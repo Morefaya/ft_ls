@@ -6,7 +6,7 @@
 /*   By: jcazako <marvin@42.fr>                     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/02/27 13:44:54 by jcazako           #+#    #+#             */
-/*   Updated: 2016/02/29 21:08:50 by jcazako          ###   ########.fr       */
+/*   Updated: 2016/02/29 21:55:53 by jcazako          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -18,8 +18,10 @@ int		(*select_sort(t_opt opt))(void*, void*)
 		return ((int(*)(void*, void*))atime_cmp);
 	else if (opt.c)
 		return ((int(*)(void*, void*))stime_cmp);
-	else
+	else if (opt.t)
 		return ((int(*)(void*, void*))mtime_cmp);
+	else
+		return ((int(*)(void*, void*))ascii_cmp);
 }
 
 static void	recursive(t_list *lst, char *dir_name, t_opt opt)

@@ -6,7 +6,7 @@
 /*   By: jcazako <marvin@42.fr>                     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/02/06 21:28:40 by jcazako           #+#    #+#             */
-/*   Updated: 2016/02/29 21:23:38 by jcazako          ###   ########.fr       */
+/*   Updated: 2016/02/29 21:46:11 by jcazako          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -90,14 +90,15 @@ void			fill_tmax(t_max *max, t_list *lst);
 
 int				get_nblock(t_list *lst);
 void			*puterror(void);
-void			free_content(t_ls *adr_content);
+void			putillegal(char opt_chr);
+void			free_content(t_ls *adr_content, size_t size);
 int				count_elem_list(t_list *lst);
 
 void			print(t_list *lst, t_opt opt);
 
 void			print_one(t_list *lst, t_opt opt);
 
-void			print_ls(t_list* lst, t_opt opt);
+void			print_ls(t_list* lst);
 
 void			print_lf(t_list* lst, t_opt opt);
 

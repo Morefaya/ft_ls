@@ -6,7 +6,7 @@
 /*   By: jcazako <marvin@42.fr>                     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/02/06 20:19:34 by jcazako           #+#    #+#             */
-/*   Updated: 2016/02/29 20:50:08 by jcazako          ###   ########.fr       */
+/*   Updated: 2016/02/29 21:47:21 by jcazako          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -46,7 +46,7 @@ static t_list	*get_link(struct dirent *f_drt, struct stat *f_stat, char *path)
 	content.link = f_readlink(content, path);
 	if (!(lst = ft_lstnew(&content, sizeof(content))))
 	{
-		free_content(&content);
+		free_content(&content, content.size);
 		return (NULL);
 	}
 	return (lst);

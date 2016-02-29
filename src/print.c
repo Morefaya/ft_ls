@@ -6,7 +6,7 @@
 /*   By: jcazako <marvin@42.fr>                     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/02/27 15:53:57 by jcazako           #+#    #+#             */
-/*   Updated: 2016/02/29 21:21:38 by jcazako          ###   ########.fr       */
+/*   Updated: 2016/02/29 21:37:28 by jcazako          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -25,7 +25,7 @@ static void	(*select_print(t_opt opt))(t_list*, t_opt)
 	else if (opt.one)
 		return (print_one);
 	else
-		return (print_ls);
+		return ((void(*)(t_list*, t_opt))print_ls);
 }
 
 void		print(t_list *lst, t_opt opt)
