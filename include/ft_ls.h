@@ -6,7 +6,7 @@
 /*   By: jcazako <marvin@42.fr>                     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/02/06 21:28:40 by jcazako           #+#    #+#             */
-/*   Updated: 2016/02/29 21:46:11 by jcazako          ###   ########.fr       */
+/*   Updated: 2016/02/29 22:42:54 by jcazako          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -67,6 +67,7 @@ typedef struct	s_opt
 	int			one;
 }				t_opt;
 
+typedef int (*p_sort)(void*, void*, t_opt);
 
 char			*get_uname(uid_t uid);
 char			*get_gname(gid_t gid);
@@ -102,12 +103,12 @@ void			print_ls(t_list* lst);
 
 void			print_lf(t_list* lst, t_opt opt);
 
-void			sort(t_list **lst, int (*f)(void*, void*));
+void			sort(t_list **lst, p_sort f, t_opt opt);
 
-int				ascii_cmp(char *str1, char *str2);
-int				mtime_cmp(time_t t1, time_t t2);
-int				atime_cmp(time_t t1, time_t t2);
-int				stime_cmp(time_t t1, time_t t2);
+int				ascii_cmp(char *str1, char *str2, t_opt opt);
+int				mtime_cmp(time_t t1, time_t t2, t_opt opt);
+int				atime_cmp(time_t t1, time_t t2, t_opt opt);
+int				stime_cmp(time_t t1, time_t t2, t_opt opt);
 
 void			time_asm(struct stat *f_stat, t_ls*content);
 

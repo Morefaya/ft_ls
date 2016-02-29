@@ -6,22 +6,22 @@
 /*   By: jcazako <marvin@42.fr>                     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/02/27 13:44:54 by jcazako           #+#    #+#             */
-/*   Updated: 2016/02/29 21:55:53 by jcazako          ###   ########.fr       */
+/*   Updated: 2016/02/29 23:12:55 by jcazako          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "ft_ls.h"
 
-int		(*select_sort(t_opt opt))(void*, void*)
+p_sort		select_sort(t_opt opt)
 {
 	if (opt.u)
-		return ((int(*)(void*, void*))atime_cmp);
+		return ((p_sort)atime_cmp);
 	else if (opt.c)
-		return ((int(*)(void*, void*))stime_cmp);
+		return ((p_sort)stime_cmp);
 	else if (opt.t)
-		return ((int(*)(void*, void*))mtime_cmp);
+		return ((p_sort)mtime_cmp);
 	else
-		return ((int(*)(void*, void*))ascii_cmp);
+		return ((p_sort)ascii_cmp);
 }
 
 static void	recursive(t_list *lst, char *dir_name, t_opt opt)
@@ -34,7 +34,11 @@ static void	recursive(t_list *lst, char *dir_name, t_opt opt)
 			((t_ls*)(lst->content))->name)))
 			return;
 		if (((t_ls*)(lst->content))->type == 'd')
+		{
+			ft_putendchar(path, ':');
+			ft_putchar('\n');
 			ft_ls(path, opt);
+		}
 		free(path);
 		lst = lst->next;
 	}
@@ -43,7 +47,7 @@ static void	recursive(t_list *lst, char *dir_name, t_opt opt)
 int			ft_ls(char *dir_name, t_opt opt)
 {
 	t_list	*lst;
-	int		(*f_sort)(void*, void*);
+	p_sort	f_sort;
 
 	if (!(lst = get_data(dir_name, opt)))
 	{
@@ -51,10 +55,13 @@ int			ft_ls(char *dir_name, t_opt opt)
 		return (1);
 	}
 	f_sort = select_sort(opt);
-	sort(&lst, (int (*)(void*, void*))f_sort);
+	sort(&lst, (p_sort)f_sort, opt);
 	print(lst, opt);
 	if (opt.R)
+	{
+		ft_putchar('\n');
 		recursive(lst, dir_name, opt);
+	}
 	ft_lstdel(&lst, (void(*)(void*, size_t))free_content);
 	return (0);
 }
