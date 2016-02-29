@@ -74,7 +74,7 @@ static t_list	*mk_link(char *arg, struct dirent *f_drt)
 	return (lst);
 }
 
-t_list			*get_data(char *arg)
+t_list			*get_data(char *arg, t_opt opt)
 {
 	DIR				*f_opn;
 	struct dirent	*f_drt;
@@ -87,9 +87,28 @@ t_list			*get_data(char *arg)
 		return (puterror());
 	while ((f_drt = readdir(f_opn)))
 	{
-		if (!(lst_tmp = mk_link(arg, f_drt)))
-			return (NULL);
-		ft_lstadd(&lst, lst_tmp);
+		if (opt.a)
+		{
+			if (!(lst_tmp = mk_link(arg, f_drt)))
+				return (NULL);
+			ft_lstadd(&lst, lst_tmp);
+		}
+		else if (opt.A)
+		{
+			if (ft_strcmp(f_drt->name, ".")
+				&& ft_strcmp(f_drt->name, ".."))
+			{
+				if (!(lst_tmp = mk_link(arg, f_drt)))
+					return (NULL);
+				ft_lstadd(&lst, lst_tmp);
+			}
+		}
+		else if (*(f_drt->name) != '.')
+		{
+			if (!(lst_tmp = mk_link(arg, f_drt)))
+				return (NULL);
+			ft_lstadd(&lst, lst_tmp);
+		}
 	}
 	closedir(f_opn);
 	return (lst);
