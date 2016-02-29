@@ -6,18 +6,11 @@
 /*   By: jcazako <marvin@42.fr>                     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/02/06 20:19:34 by jcazako           #+#    #+#             */
-/*   Updated: 2016/02/25 20:09:25 by jcazako          ###   ########.fr       */
+/*   Updated: 2016/02/29 20:50:08 by jcazako          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "ft_ls.h"
-
-static void		time_asm(struct stat *f_stat, t_ls *content)
-{
-	content->mtime = f_stat->st_mtime;
-	content->atime = f_stat->st_atime;
-	content->stime = f_stat->st_ctime;
-}
 
 static char		*f_readlink(t_ls content, char *path)
 {
@@ -74,11 +67,38 @@ static t_list	*mk_link(char *arg, struct dirent *f_drt)
 	return (lst);
 }
 
-t_list			*get_data(char *arg)
+static void		d_link(struct dirent *f_drt, t_list **lst, char *arg, t_opt opt)
+{
+	t_list	*lst_tmp;
+
+	if (opt.a)
+	{
+		if (!(lst_tmp = mk_link(arg, f_drt)))
+			return ;
+		ft_lstadd(lst, lst_tmp);
+	}
+	else if (opt.A)
+	{
+		if (ft_strcmp(f_drt->d_name, ".")
+			&& ft_strcmp(f_drt->d_name, ".."))
+		{
+			if (!(lst_tmp = mk_link(arg, f_drt)))
+				return ;
+			ft_lstadd(lst, lst_tmp);
+		}
+	}
+	else if (*(f_drt->d_name) != '.')
+	{
+		if (!(lst_tmp = mk_link(arg, f_drt)))
+			return ;
+		ft_lstadd(lst, lst_tmp);
+	}
+}
+
+t_list			*get_data(char *arg, t_opt opt)
 {
 	DIR				*f_opn;
 	struct dirent	*f_drt;
-	t_list			*lst_tmp;
 	t_list			*lst;
 
 	errno = 0;
@@ -86,11 +106,7 @@ t_list			*get_data(char *arg)
 	if (!(f_opn = opendir(arg)))
 		return (puterror());
 	while ((f_drt = readdir(f_opn)))
-	{
-		if (!(lst_tmp = mk_link(arg, f_drt)))
-			return (NULL);
-		ft_lstadd(&lst, lst_tmp);
-	}
+		d_link(f_drt, &lst, arg, opt);
 	closedir(f_opn);
 	return (lst);
 }

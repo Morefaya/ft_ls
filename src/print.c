@@ -1,29 +1,37 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   main.c                                             :+:      :+:    :+:   */
+/*   print.c                                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: jcazako <marvin@42.fr>                     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2016/02/27 13:29:48 by jcazako           #+#    #+#             */
-/*   Updated: 2016/02/27 13:31:24 by jcazako          ###   ########.fr       */
+/*   Created: 2016/02/27 15:53:57 by jcazako           #+#    #+#             */
+/*   Updated: 2016/02/29 21:21:38 by jcazako          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "ft_ls.h"
 
-int		main(int ac, char **av)
+void 		print_one(t_list *lst, t_opt opt)
 {
-	t_opt	opt;
-	int	index;
+	while (lst && opt.one)
+		ft_putendl(((t_ls*)(lst->content))->name);
+}
 
-	index = check_opt(ac, av, &opt);
-	if (index == ac + 1)
-		ft_ls(".", opt);
-	while (index < ac)
-	{
-		ft_ls(av[index], opt);
-		index++;
-	}
-	return (0);
+static void	(*select_print(t_opt opt))(t_list*, t_opt)
+{
+	if (opt.l || opt.g)
+		return (print_lf);
+	else if (opt.one)
+		return (print_one);
+	else
+		return (print_ls);
+}
+
+void		print(t_list *lst, t_opt opt)
+{
+	void	(*f_print)(t_list*, t_opt);
+
+	f_print = select_print(opt);
+	f_print(lst, opt);
 }

@@ -1,29 +1,20 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   main.c                                             :+:      :+:    :+:   */
+/*   tool_data.c                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: jcazako <marvin@42.fr>                     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2016/02/27 13:29:48 by jcazako           #+#    #+#             */
-/*   Updated: 2016/02/27 13:31:24 by jcazako          ###   ########.fr       */
+/*   Created: 2016/02/29 19:22:02 by jcazako           #+#    #+#             */
+/*   Updated: 2016/02/29 20:36:01 by jcazako          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "ft_ls.h"
 
-int		main(int ac, char **av)
+void	time_asm(struct stat *f_stat, t_ls *content)
 {
-	t_opt	opt;
-	int	index;
-
-	index = check_opt(ac, av, &opt);
-	if (index == ac + 1)
-		ft_ls(".", opt);
-	while (index < ac)
-	{
-		ft_ls(av[index], opt);
-		index++;
-	}
-	return (0);
+	content->mtime = f_stat->st_mtime;
+	content->atime = f_stat->st_atime;
+	content->stime = f_stat->st_ctime;
 }
