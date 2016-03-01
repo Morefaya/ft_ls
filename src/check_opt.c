@@ -69,11 +69,7 @@ static void	fill_opt_oba(char ch, t_opt *opt)
 	if (ch == 'r')
 		opt->r = 1;
 	if (ch == 't')
-	{
 		opt->t = 1;
-		opt->u = 0;
-		opt->c = 0;
-	}
 	fill_opt_bon(ch, opt);
 }
 

@@ -12,34 +12,36 @@
 
 #include "ft_ls.h"
 
-int	ascii_cmp(char *str1, char *str2, t_opt opt)
+int	ascii_cmp(t_ls *content_1, t_ls *content_2)
 {
-	int	i;
-
-	i = (opt.r) ? -1 : 1;
-	return (i * ft_strcmp(str1, str2));
+	return (ft_strcmp(content_1->name, content_2->name));
 }
 
-int	mtime_cmp(time_t t1, time_t t2, t_opt opt)
+int	mtime_cmp(t_ls *content_1, t_ls *content_2)
 {
-	int	i;
-
-	i = (opt.r) ? -1 : 1;
-	return ((int)(i *(t1 - t2)));
+	if (content_2->mtime > content_1->mtime)
+		return (1);
+	else if (content_1->mtime > content_2->mtime)
+		return (-1);
+	else
+		return (0);
 }
 
-int	atime_cmp(time_t t1, time_t t2, t_opt opt)
+int	atime_cmp(t_ls *content_1, t_ls *content_2)
 {
-	int	i;
-
-	i = (opt.r) ? -1 : 1;
-	return ((int)(i * (t1 - t2)));
+	if (content_2->atime > content_1->atime)
+		return (1);
+	else if (content_1->atime > content_2->atime)
+		return (-1);
+	else
+		return (0);
 }
-
-int	stime_cmp(time_t t1, time_t t2, t_opt opt)
+int	stime_cmp(t_ls *content_1, t_ls *content_2)
 {
-	int	i;
-
-	i = (opt.r) ? -1 : 1;
-	return ((int)(i * (t1 - t2)));
+	if (content_2->stime > content_1->stime)
+		return (1);
+	else if (content_1->stime > content_2->stime)
+		return (-1);
+	else
+		return (0);
 }

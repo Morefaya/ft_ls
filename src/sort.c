@@ -31,12 +31,15 @@ static t_list	*split(t_list *lst)
 
 static t_list	*fusion(t_list *lst_g, t_list *lst_d, p_sort f, t_opt opt)
 {
+	int	signe;
+
+	signe = (opt.r) ? -1 : 1;
 	if (!lst_g)
 		return (lst_d);
 	else if (!lst_d)
 		return (lst_g);
-	else if (f(((t_ls*)(lst_g->content))->name,
-		((t_ls*)(lst_d->content))->name, opt) < 0)
+	else if (signe * f(lst_g->content,
+		lst_d->content) < 0)
 	{
 		lst_g->next = fusion(lst_g->next, lst_d, f, opt);
 		return (lst_g);

@@ -25,19 +25,19 @@ static char		*f_readlink(t_ls content, char *path)
 	return (NULL);
 }
 
-static t_list	*get_link(struct dirent *f_drt, struct stat *f_stat, char *path)
+static t_list	*get_link(char *d_name, struct stat *f_stat, char *path)
 {
 	t_ls			content;
 	t_list			*lst;
 
-	if (!f_stat || !f_drt)
+	if (!f_stat || !d_name)
 		return (NULL);
 	errno = 0;
 	content.nb_hlink = (int)(f_stat->st_nlink);
 	content.size = (int)(f_stat->st_size);
 	content.nb_blk = (int)(f_stat->st_blocks);
 	time_asm(f_stat, &content);
-	if (!(content.name = ft_strdup(f_drt->d_name))
+	if (!(content.name = ft_strdup(d_name))
 		|| !(content.u_name = get_uname(f_stat->st_uid))
 		|| !(content.g_name = get_gname(f_stat->st_gid))
 		|| !(content.rights = get_rights(f_stat, path))
@@ -52,17 +52,17 @@ static t_list	*get_link(struct dirent *f_drt, struct stat *f_stat, char *path)
 	return (lst);
 }
 
-static t_list	*mk_link(char *arg, struct dirent *f_drt)
+static t_list	*mk_link(char *arg, char *d_name)
 {
 	char			*path;
 	t_list			*lst;
 	struct stat		buff_stat;
 
-	if (!(path = path_builder(arg, f_drt->d_name)))
+	if (!(path = path_builder(arg, d_name)))
 		return (NULL);
 	if (lstat(path, &buff_stat) == -1)
 		return (puterror());
-	if (!(lst = get_link(f_drt, &buff_stat, path)))
+	if (!(lst = get_link(d_name, &buff_stat, path)))
 		return (NULL);
 	return (lst);
 }
@@ -73,7 +73,7 @@ static void		d_link(struct dirent *f_drt, t_list **lst, char *arg, t_opt opt)
 
 	if (opt.a)
 	{
-		if (!(lst_tmp = mk_link(arg, f_drt)))
+		if (!(lst_tmp = mk_link(arg, f_drt->d_name)))
 			return ;
 		ft_lstadd(lst, lst_tmp);
 	}
@@ -82,14 +82,14 @@ static void		d_link(struct dirent *f_drt, t_list **lst, char *arg, t_opt opt)
 		if (ft_strcmp(f_drt->d_name, ".")
 			&& ft_strcmp(f_drt->d_name, ".."))
 		{
-			if (!(lst_tmp = mk_link(arg, f_drt)))
+			if (!(lst_tmp = mk_link(arg, f_drt->d_name)))
 				return ;
 			ft_lstadd(lst, lst_tmp);
 		}
 	}
 	else if (*(f_drt->d_name) != '.')
 	{
-		if (!(lst_tmp = mk_link(arg, f_drt)))
+		if (!(lst_tmp = mk_link(arg, f_drt->d_name)))
 			return ;
 		ft_lstadd(lst, lst_tmp);
 	}

@@ -14,9 +14,9 @@
 
 p_sort		select_sort(t_opt opt)
 {
-	if (opt.u)
+	if (opt.u && opt.t)
 		return ((p_sort)atime_cmp);
-	else if (opt.c)
+	else if (opt.c && opt.t)
 		return ((p_sort)stime_cmp);
 	else if (opt.t)
 		return ((p_sort)mtime_cmp);
@@ -33,7 +33,9 @@ static void	recursive(t_list *lst, char *dir_name, t_opt opt)
 		if (!(path = path_builder(dir_name,
 			((t_ls*)(lst->content))->name)))
 			return;
-		if (((t_ls*)(lst->content))->type == 'd')
+		if (((t_ls*)(lst->content))->type == 'd'
+			&& ft_strcmp(((t_ls*)(lst->content))->name, ".")
+			&& ft_strcmp(((t_ls*)(lst->content))->name, ".."))
 		{
 			ft_putchar('\n');
 			ft_putendchar(path, ':');

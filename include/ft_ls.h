@@ -67,7 +67,7 @@ typedef struct	s_opt
 	int			one;
 }				t_opt;
 
-typedef int (*p_sort)(void*, void*, t_opt);
+typedef int (*p_sort)(t_ls*, t_ls*);
 
 char			*get_uname(uid_t uid);
 char			*get_gname(gid_t gid);
@@ -105,10 +105,10 @@ void			print_lf(t_list* lst, t_opt opt);
 
 void			sort(t_list **lst, p_sort f, t_opt opt);
 
-int				ascii_cmp(char *str1, char *str2, t_opt opt);
-int				mtime_cmp(time_t t1, time_t t2, t_opt opt);
-int				atime_cmp(time_t t1, time_t t2, t_opt opt);
-int				stime_cmp(time_t t1, time_t t2, t_opt opt);
+int				ascii_cmp(t_ls *content_1, t_ls *content_2);
+int				mtime_cmp(t_ls *content_1, t_ls *content_2);
+int				atime_cmp(t_ls *content_1, t_ls *content_2);
+int				stime_cmp(t_ls *content_1, t_ls *content_2);
 
 void			time_asm(struct stat *f_stat, t_ls*content);
 
