@@ -35,6 +35,7 @@ static void	recursive(t_list *lst, char *dir_name, t_opt opt)
 			return;
 		if (((t_ls*)(lst->content))->type == 'd')
 		{
+			ft_putchar('\n');
 			ft_putendchar(path, ':');
 			ft_putchar('\n');
 			ft_ls(path, opt);
@@ -59,7 +60,6 @@ int			ft_ls(char *dir_name, t_opt opt)
 	print(lst, opt);
 	if (opt.R)
 	{
-		ft_putchar('\n');
 		recursive(lst, dir_name, opt);
 	}
 	ft_lstdel(&lst, (void(*)(void*, size_t))free_content);
