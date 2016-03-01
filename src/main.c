@@ -15,15 +15,20 @@
 int		main(int ac, char **av)
 {
 	t_opt	opt;
-	int		index;
+	int	index;
+	int	n_av;
 
 	index = check_opt(ac, av, &opt);
 	if (index == ac)
 		ft_ls(".", opt);
+	n_av = ac - index;
 	while (index < ac)
 	{
-		ft_putendchar(av[index], ':');
-		ft_putchar('\n');
+		if (n_av > 1)
+		{
+			ft_putendchar(av[index], ':');
+			ft_putchar('\n');
+		}
 		ft_ls(av[index], opt);
 		index++;
 		if (index != ac)

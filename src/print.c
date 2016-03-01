@@ -15,7 +15,10 @@
 void 		print_one(t_list *lst, t_opt opt)
 {
 	while (lst && opt.one)
+	{
 		ft_putendl(((t_ls*)(lst->content))->name);
+		lst = lst->next;
+	}
 }
 
 static void	(*select_print(t_opt opt))(t_list*, t_opt)
