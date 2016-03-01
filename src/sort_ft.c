@@ -24,7 +24,7 @@ int	mtime_cmp(t_ls *content_1, t_ls *content_2)
 	else if (content_1->mtime > content_2->mtime)
 		return (-1);
 	else
-		return (0);
+		return (ascii_cmp(content_1, content_2));
 }
 
 int	atime_cmp(t_ls *content_1, t_ls *content_2)
@@ -34,7 +34,7 @@ int	atime_cmp(t_ls *content_1, t_ls *content_2)
 	else if (content_1->atime > content_2->atime)
 		return (-1);
 	else
-		return (0);
+		return (ascii_cmp(content_1, content_2));
 }
 int	stime_cmp(t_ls *content_1, t_ls *content_2)
 {
@@ -43,5 +43,5 @@ int	stime_cmp(t_ls *content_1, t_ls *content_2)
 	else if (content_1->stime > content_2->stime)
 		return (-1);
 	else
-		return (0);
+		return (ascii_cmp(content_1, content_2));
 }

@@ -67,9 +67,12 @@ void	print_lf(t_list *lst, t_opt opt)
 	t_max	buff;
 
 	fill_tmax(&buff, lst);
-	ft_putstr("total ");
-	ft_putnbr(get_nblock(lst));
-	ft_putchar('\n');
+	if (errno != ENOTDIR)
+	{
+		ft_putstr("total ");
+		ft_putnbr(get_nblock(lst));
+		ft_putchar('\n');
+	}
 	while (lst)
 	{
 		putlf(lst, buff, opt);

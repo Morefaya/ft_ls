@@ -97,16 +97,23 @@ static void		d_link(struct dirent *f_drt, t_list **lst, char *arg, t_opt opt)
 
 t_list			*get_data(char *arg, t_opt opt)
 {
-	DIR				*f_opn;
+	DIR		*f_opn;
 	struct dirent	*f_drt;
-	t_list			*lst;
+	t_list		*lst;
 
 	errno = 0;
 	lst = NULL;
-	if (!(f_opn = opendir(arg)))
-		return (puterror());
-	while ((f_drt = readdir(f_opn)))
-		d_link(f_drt, &lst, arg, opt);
-	closedir(f_opn);
+	if ((f_opn = opendir(arg)))
+	{
+		while ((f_drt = readdir(f_opn)))
+			d_link(f_drt, &lst, arg, opt);
+		closedir(f_opn);
+	}
+	else if (errno == ENOTDIR)
+	{
+		if (!(lst = mk_link(".", arg)))
+			return (NULL);
+		errno = ENOTDIR;
+	}
 	return (lst);
 }

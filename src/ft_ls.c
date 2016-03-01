@@ -49,12 +49,15 @@ static void	recursive(t_list *lst, char *dir_name, t_opt opt)
 
 int			ft_ls(char *dir_name, t_opt opt)
 {
-	t_list	*lst;
-	p_sort	f_sort;
+	t_list		*lst;
+	p_sort		f_sort;
 
 	if (!(lst = get_data(dir_name, opt)))
 	{
-		ft_putendl("error get_data");
+		ft_putstr("ft_ls: ");
+		ft_putendchar(dir_name, ':');
+		ft_putchar(' ');
+		ft_putendl(strerror(errno));
 		return (1);
 	}
 	f_sort = select_sort(opt);
