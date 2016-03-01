@@ -59,13 +59,15 @@ static void	fill_opt_oba(char ch, t_opt *opt)
 		opt->l = 1;
 		opt->one = 0;
 	}
-	opt->R = (ch == 'R') ? 1 : 0;
+	if (ch == 'R')
+		opt->R = 1;
 	if (ch == 'a')
 	{
 		opt->a = 1;
 		opt->A = 0;
 	}
-	opt->r = (ch == 'r') ? 1 : 0;
+	if (ch == 'r')
+		opt->r = 1;
 	if (ch == 't')
 	{
 		opt->t = 1;
@@ -97,8 +99,8 @@ int			check_opt(int ac, char **av, t_opt *opt)
 {
 	int	i;
 
-	i = 1;
 	init_opt(opt);
+	i = 1;
 	while (i < ac && av[i][0] == '-')
 	{
 		pars_opt(av[i], opt);

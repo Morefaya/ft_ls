@@ -20,7 +20,7 @@ void	*puterror(void)
 
 void	putillegal(char opt_chr)
 {
-	ft_putendl("ft_ls: illegal option --");
+	ft_putstr("ft_ls: illegal option -- ");
 	ft_putchar(opt_chr);
 	ft_putchar('\n');
 	ft_putendl("usage: ft_ls [-lRartAucg1] [file ...]");
