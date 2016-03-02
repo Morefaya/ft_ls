@@ -24,6 +24,7 @@ static void	init_opt(t_opt *opt)
 	opt->c = 0;
 	opt->g = 0;
 	opt->one = 0;
+	opt->lf_dir = 0;
 }
 
 static void	fill_opt_bon(char ch, t_opt *opt)

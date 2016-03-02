@@ -54,10 +54,7 @@ int			ft_ls(char *dir_name, t_opt opt)
 
 	if (!(lst = get_data(dir_name, opt)))
 	{
-		ft_putstr("ft_ls: ");
-		ft_putendchar(dir_name, ':');
-		ft_putchar(' ');
-		ft_putendl(strerror(errno));
+		puterror(dir_name);
 		return (1);
 	}
 	f_sort = select_sort(opt);

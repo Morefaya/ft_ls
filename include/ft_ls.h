@@ -65,6 +65,7 @@ typedef struct	s_opt
 	int			c;
 	int			g;
 	int			one;
+	int			lf_dir;
 }				t_opt;
 
 typedef int (*p_sort)(t_ls*, t_ls*);
@@ -90,7 +91,7 @@ int				max_w_name(t_list *lst);
 void			fill_tmax(t_max *max, t_list *lst);
 
 int				get_nblock(t_list *lst);
-void			*puterror(void);
+void			puterror(char* err);
 void			putillegal(char opt_chr);
 void			free_content(t_ls *adr_content, size_t size);
 int				count_elem_list(t_list *lst);
@@ -103,6 +104,7 @@ void			print_ls(t_list* lst);
 
 void			print_lf(t_list* lst, t_opt opt);
 
+p_sort			select_sort(t_opt opt);
 void			sort(t_list **lst, p_sort f, t_opt opt);
 
 int				ascii_cmp(t_ls *content_1, t_ls *content_2);
@@ -115,5 +117,9 @@ void			time_asm(struct stat *f_stat, t_ls*content);
 int				check_opt(int ac, char **av, t_opt *opt);
 
 int				ft_ls(char *dir_name, t_opt opt);
+
+void		split_arg(t_list **lst_f, t_list **lst_d, char **av, int n_av);
+
+t_list			*get_link(char *d_name, struct stat *f_stat, char* path);
 
 #endif

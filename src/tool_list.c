@@ -12,10 +12,12 @@
 
 #include "ft_ls.h"
 
-void	*puterror(void)
+void	puterror(char *err)
 {
+	ft_putstr("ft_ls: ");
+	ft_putendchar(err, ':');
+	ft_putchar(' ');
 	ft_putendl(strerror(errno));
-	return (NULL);
 }
 
 void	putillegal(char opt_chr)

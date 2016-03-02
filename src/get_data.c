@@ -25,7 +25,7 @@ static char		*f_readlink(t_ls content, char *path)
 	return (NULL);
 }
 
-static t_list	*get_link(char *d_name, struct stat *f_stat, char *path)
+t_list	*get_link(char *d_name, struct stat *f_stat, char *path)
 {
 	t_ls			content;
 	t_list			*lst;
@@ -61,13 +61,16 @@ static t_list	*mk_link(char *arg, char *d_name)
 	if (!(path = path_builder(arg, d_name)))
 		return (NULL);
 	if (lstat(path, &buff_stat) == -1)
-		return (puterror());
+	{
+		puterror(path);
+		return (NULL);
+	}
 	if (!(lst = get_link(d_name, &buff_stat, path)))
 		return (NULL);
 	return (lst);
 }
 
-static void		d_link(struct dirent *f_drt, t_list **lst, char *arg, t_opt opt)
+static void	d_link(struct dirent *f_drt, t_list **lst, char *arg, t_opt opt)
 {
 	t_list	*lst_tmp;
 

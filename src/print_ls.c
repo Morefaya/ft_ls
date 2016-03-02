@@ -62,6 +62,8 @@ void		print_ls(t_list *lst)
 	int		width;
 	int		nb_lgn;
 
+	if (!lst)
+		return;
 	nb_col = 1;
 	errno = 0;
 	if ((ioctl(1, TIOCGWINSZ, &ws) == -1))
