@@ -6,22 +6,22 @@
 /*   By: jcazako <marvin@42.fr>                     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/02/27 13:44:54 by jcazako           #+#    #+#             */
-/*   Updated: 2016/03/03 16:27:21 by jcazako          ###   ########.fr       */
+/*   Updated: 2016/03/03 17:49:40 by jcazako          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "ft_ls.h"
 
-p_sort		select_sort(t_opt opt)
+t_sort		select_sort(t_opt opt)
 {
 	if (opt.u && opt.t)
-		return ((p_sort)atime_cmp);
+		return ((t_sort)atime_cmp);
 	else if (opt.c && opt.t)
-		return ((p_sort)stime_cmp);
+		return ((t_sort)stime_cmp);
 	else if (opt.t)
-		return ((p_sort)mtime_cmp);
+		return ((t_sort)mtime_cmp);
 	else
-		return ((p_sort)ascii_cmp);
+		return ((t_sort)ascii_cmp);
 }
 
 static void	recursive(t_list *lst, char *dir_name, t_opt opt)
@@ -50,7 +50,7 @@ static void	recursive(t_list *lst, char *dir_name, t_opt opt)
 int			ft_ls(char *dir_name, t_opt opt)
 {
 	t_list		*lst;
-	p_sort		f_sort;
+	t_sort		f_sort;
 
 	if (!(lst = get_data(dir_name, opt)))
 	{
@@ -58,7 +58,7 @@ int			ft_ls(char *dir_name, t_opt opt)
 		return (1);
 	}
 	f_sort = select_sort(opt);
-	sort(&lst, (p_sort)f_sort, opt);
+	sort(&lst, (t_sort)f_sort, opt);
 	print(lst, opt);
 	if (opt.rr)
 	{

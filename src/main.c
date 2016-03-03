@@ -6,7 +6,7 @@
 /*   By: jcazako <marvin@42.fr>                     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/02/27 13:29:48 by jcazako           #+#    #+#             */
-/*   Updated: 2016/03/03 16:27:26 by jcazako          ###   ########.fr       */
+/*   Updated: 2016/03/03 17:46:53 by jcazako          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -34,7 +34,7 @@ int			main(int ac, char **av)
 	int		index;
 	t_list	*lst_f;
 	t_list	*lst_d;
-	p_sort	pt_arg;
+	t_sort	pt_arg;
 
 	lst_f = NULL;
 	lst_d = NULL;

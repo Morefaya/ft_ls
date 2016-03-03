@@ -6,7 +6,7 @@
 /*   By: jcazako <marvin@42.fr>                     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/02/06 21:28:40 by jcazako           #+#    #+#             */
-/*   Updated: 2016/03/03 16:27:50 by jcazako          ###   ########.fr       */
+/*   Updated: 2016/03/03 17:45:03 by jcazako          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -68,7 +68,7 @@ typedef struct	s_opt
 	int			lf_dir;
 }				t_opt;
 
-typedef	int	(*p_sort)(t_ls*, t_ls*);
+typedef	int	(*t_sort)(t_ls*, t_ls*);
 
 char			*get_uname(uid_t uid);
 char			*get_gname(gid_t gid);
@@ -104,8 +104,8 @@ void			print_ls(t_list *lst);
 
 void			print_lf(t_list *lst, t_opt opt);
 
-p_sort			select_sort(t_opt opt);
-void			sort(t_list **lst, p_sort f, t_opt opt);
+t_sort			select_sort(t_opt opt);
+void			sort(t_list **lst, t_sort f, t_opt opt);
 
 int				ascii_cmp(t_ls *content_1, t_ls *content_2);
 int				mtime_cmp(t_ls *content_1, t_ls *content_2);

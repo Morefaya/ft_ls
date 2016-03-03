@@ -6,7 +6,7 @@
 /*   By: jcazako <marvin@42.fr>                     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/02/23 18:57:09 by jcazako           #+#    #+#             */
-/*   Updated: 2016/03/03 16:21:34 by jcazako          ###   ########.fr       */
+/*   Updated: 2016/03/03 17:47:45 by jcazako          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -29,7 +29,7 @@ static t_list	*split(t_list *lst)
 	}
 }
 
-static t_list	*fusion(t_list *lst_g, t_list *lst_d, p_sort f, t_opt opt)
+static t_list	*fusion(t_list *lst_g, t_list *lst_d, t_sort f, t_opt opt)
 {
 	int	signe;
 
@@ -51,7 +51,7 @@ static t_list	*fusion(t_list *lst_g, t_list *lst_d, p_sort f, t_opt opt)
 	}
 }
 
-void			sort(t_list **lst, p_sort f, t_opt opt)
+void			sort(t_list **lst, t_sort f, t_opt opt)
 {
 	t_list *aux;
 
