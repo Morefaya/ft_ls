@@ -1,27 +1,16 @@
+/* ************************************************************************** */
+/*                                                                            */
+/*                                                        :::      ::::::::   */
+/*   split_arg.c                                        :+:      :+:    :+:   */
+/*                                                    +:+ +:+         +:+     */
+/*   By: jcazako <marvin@42.fr>                     +#+  +:+       +#+        */
+/*                                                +#+#+#+#+#+   +#+           */
+/*   Created: 2016/03/03 14:56:06 by jcazako           #+#    #+#             */
+/*   Updated: 2016/03/03 14:58:47 by jcazako          ###   ########.fr       */
+/*                                                                            */
+/* ************************************************************************** */
+
 #include "ft_ls.h"
-
-/*static t_list	*get_link(char *arg)
-{
-	t_list	*lst_tmp;
-	t_arg	content;
-	struct stat	f_stat;
-
-	if (!arg)
-		return (NULL);
-	if (lstat(arg, &f_stat) == -1)
-		return (puterror());
-	if (!(content.arg = ft_strdup(arg)))
-		return (NULL);
-	content.mtime = f_stat.st_mtime;
-	content.atime = f_stat.st_atime;
-	content.stime = f_stat.st_ctime;
-	if (!(lst_tmp = ft_lstnew(&content, sizeof(content))))
-	{
-		free(content.arg);
-		return (NULL);
-	}
-	return (lst_tmp);
-}*/
 
 static t_list	*mk_arg(char *av)
 {
@@ -38,12 +27,12 @@ static t_list	*mk_arg(char *av)
 	return (lst);
 }
 
-static void	get_arg(t_list **lst_f, t_list **lst_d, char *av)
+static void		get_arg(t_list **lst_f, t_list **lst_d, char *av)
 {
 	t_list	*lst_tmp;
-	
+
 	if (!(lst_tmp = mk_arg(av)))
-		return;
+		return ;
 	if (opendir(av))
 		ft_lstadd(lst_d, lst_tmp);
 	else if (errno == ENOTDIR)
@@ -53,11 +42,11 @@ static void	get_arg(t_list **lst_f, t_list **lst_d, char *av)
 		free_content(lst_tmp->content, lst_tmp->content_size);
 		free(lst_tmp);
 		puterror(av);
-		return;
+		return ;
 	}
 }
 
-void	split_arg(t_list **lst_f, t_list **lst_d, char **av, int n_av)
+void			split_arg(t_list **lst_f, t_list **lst_d, char **av, int n_av)
 {
 	int	i;
 

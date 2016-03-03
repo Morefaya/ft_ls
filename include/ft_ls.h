@@ -6,7 +6,7 @@
 /*   By: jcazako <marvin@42.fr>                     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/02/06 21:28:40 by jcazako           #+#    #+#             */
-/*   Updated: 2016/02/29 22:42:54 by jcazako          ###   ########.fr       */
+/*   Updated: 2016/03/03 16:27:50 by jcazako          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -56,11 +56,11 @@ typedef struct	s_max
 typedef struct	s_opt
 {
 	int			l;
-	int			R;
+	int			rr;
 	int			a;
 	int			r;
 	int			t;
-	int			A;
+	int			aa;
 	int			u;
 	int			c;
 	int			g;
@@ -68,7 +68,7 @@ typedef struct	s_opt
 	int			lf_dir;
 }				t_opt;
 
-typedef int (*p_sort)(t_ls*, t_ls*);
+typedef	int	(*p_sort)(t_ls*, t_ls*);
 
 char			*get_uname(uid_t uid);
 char			*get_gname(gid_t gid);
@@ -91,7 +91,7 @@ int				max_w_name(t_list *lst);
 void			fill_tmax(t_max *max, t_list *lst);
 
 int				get_nblock(t_list *lst);
-void			puterror(char* err);
+void			puterror(char *err);
 void			putillegal(char opt_chr);
 void			free_content(t_ls *adr_content, size_t size);
 int				count_elem_list(t_list *lst);
@@ -100,9 +100,9 @@ void			print(t_list *lst, t_opt opt);
 
 void			print_one(t_list *lst, t_opt opt);
 
-void			print_ls(t_list* lst);
+void			print_ls(t_list *lst);
 
-void			print_lf(t_list* lst, t_opt opt);
+void			print_lf(t_list *lst, t_opt opt);
 
 p_sort			select_sort(t_opt opt);
 void			sort(t_list **lst, p_sort f, t_opt opt);
@@ -118,8 +118,8 @@ int				check_opt(int ac, char **av, t_opt *opt);
 
 int				ft_ls(char *dir_name, t_opt opt);
 
-void		split_arg(t_list **lst_f, t_list **lst_d, char **av, int n_av);
+void			split_arg(t_list **lst_f, t_list **lst_d, char **av, int n_av);
 
-t_list			*get_link(char *d_name, struct stat *f_stat, char* path);
+t_list			*get_link(char *d_name, struct stat *f_stat, char *path);
 
 #endif

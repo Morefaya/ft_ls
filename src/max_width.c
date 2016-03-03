@@ -6,7 +6,7 @@
 /*   By: jcazako <marvin@42.fr>                     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/02/19 17:00:38 by jcazako           #+#    #+#             */
-/*   Updated: 2016/02/19 18:21:41 by jcazako          ###   ########.fr       */
+/*   Updated: 2016/03/03 14:51:39 by jcazako          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -93,12 +93,4 @@ int		max_w_name(t_list *lst)
 		lst = lst->next;
 	}
 	return (max);
-}
-
-void	fill_tmax(t_max *max, t_list *lst)
-{
-	max->mx_hl = max_w_hlink(lst);
-	max->mx_sz = max_w_size(lst);
-	max->mx_un = max_w_uname(lst);
-	max->mx_gn = max_w_gname(lst);
 }

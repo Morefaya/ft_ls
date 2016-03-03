@@ -6,7 +6,7 @@
 /*   By: jcazako <marvin@42.fr>                     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/02/18 16:49:47 by jcazako           #+#    #+#             */
-/*   Updated: 2016/02/29 21:20:53 by jcazako          ###   ########.fr       */
+/*   Updated: 2016/03/03 14:52:40 by jcazako          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -27,7 +27,7 @@ static void	print_time(time_t time)
 	char	*str;
 
 	if (!(str = get_time(time)))
-		return;
+		return ;
 	ft_putendchar(str, ' ');
 	free(str);
 }
@@ -62,12 +62,12 @@ static void	putlf(t_list *lst, t_max buff, t_opt opt)
 	print_link(((t_ls*)(lst->content))->link);
 }
 
-void	print_lf(t_list *lst, t_opt opt)
+void		print_lf(t_list *lst, t_opt opt)
 {
 	t_max	buff;
 
 	if (!lst)
-		return;
+		return ;
 	fill_tmax(&buff, lst);
 	if (opt.lf_dir)
 	{

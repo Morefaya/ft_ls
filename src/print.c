@@ -6,13 +6,13 @@
 /*   By: jcazako <marvin@42.fr>                     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/02/27 15:53:57 by jcazako           #+#    #+#             */
-/*   Updated: 2016/02/29 21:37:28 by jcazako          ###   ########.fr       */
+/*   Updated: 2016/03/03 14:43:57 by jcazako          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "ft_ls.h"
 
-void 		print_one(t_list *lst, t_opt opt)
+void		print_one(t_list *lst, t_opt opt)
 {
 	while (lst && opt.one)
 	{

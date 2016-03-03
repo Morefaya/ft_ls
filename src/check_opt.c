@@ -6,7 +6,7 @@
 /*   By: jcazako <marvin@42.fr>                     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/02/27 13:26:38 by jcazako           #+#    #+#             */
-/*   Updated: 2016/02/27 15:46:58 by jcazako          ###   ########.fr       */
+/*   Updated: 2016/03/03 15:23:20 by jcazako          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,11 +15,11 @@
 static void	init_opt(t_opt *opt)
 {
 	opt->l = 0;
-	opt->R = 0;
+	opt->rr = 0;
 	opt->a = 0;
 	opt->r = 0;
 	opt->t = 0;
-	opt->A = 0;
+	opt->aa = 0;
 	opt->u = 0;
 	opt->c = 0;
 	opt->g = 0;
@@ -30,7 +30,7 @@ static void	init_opt(t_opt *opt)
 static void	fill_opt_bon(char ch, t_opt *opt)
 {
 	if (ch == 'A' && !opt->a)
-		opt->A = 1;
+		opt->aa = 1;
 	if (ch == 'u' && !opt->t)
 	{
 		opt->u = 1;
@@ -61,11 +61,11 @@ static void	fill_opt_oba(char ch, t_opt *opt)
 		opt->one = 0;
 	}
 	if (ch == 'R')
-		opt->R = 1;
+		opt->rr = 1;
 	if (ch == 'a')
 	{
 		opt->a = 1;
-		opt->A = 0;
+		opt->aa = 0;
 	}
 	if (ch == 'r')
 		opt->r = 1;
@@ -100,6 +100,8 @@ int			check_opt(int ac, char **av, t_opt *opt)
 	i = 1;
 	while (i < ac && av[i][0] == '-')
 	{
+		if (!av[i][1])
+			return (i);
 		pars_opt(av[i], opt);
 		i++;
 	}

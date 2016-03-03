@@ -6,7 +6,7 @@
 /*   By: jcazako <marvin@42.fr>                     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/02/27 13:44:54 by jcazako           #+#    #+#             */
-/*   Updated: 2016/02/29 23:12:55 by jcazako          ###   ########.fr       */
+/*   Updated: 2016/03/03 16:27:21 by jcazako          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -32,7 +32,7 @@ static void	recursive(t_list *lst, char *dir_name, t_opt opt)
 	{
 		if (!(path = path_builder(dir_name,
 			((t_ls*)(lst->content))->name)))
-			return;
+			return ;
 		if (((t_ls*)(lst->content))->type == 'd'
 			&& ft_strcmp(((t_ls*)(lst->content))->name, ".")
 			&& ft_strcmp(((t_ls*)(lst->content))->name, ".."))
@@ -60,7 +60,7 @@ int			ft_ls(char *dir_name, t_opt opt)
 	f_sort = select_sort(opt);
 	sort(&lst, (p_sort)f_sort, opt);
 	print(lst, opt);
-	if (opt.R)
+	if (opt.rr)
 	{
 		recursive(lst, dir_name, opt);
 	}

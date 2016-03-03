@@ -6,7 +6,7 @@
 /*   By: jcazako <marvin@42.fr>                     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/02/06 20:19:34 by jcazako           #+#    #+#             */
-/*   Updated: 2016/02/29 21:47:21 by jcazako          ###   ########.fr       */
+/*   Updated: 2016/03/03 15:20:08 by jcazako          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -25,7 +25,7 @@ static char		*f_readlink(t_ls content, char *path)
 	return (NULL);
 }
 
-t_list	*get_link(char *d_name, struct stat *f_stat, char *path)
+t_list			*get_link(char *d_name, struct stat *f_stat, char *path)
 {
 	t_ls			content;
 	t_list			*lst;
@@ -70,7 +70,7 @@ static t_list	*mk_link(char *arg, char *d_name)
 	return (lst);
 }
 
-static void	d_link(struct dirent *f_drt, t_list **lst, char *arg, t_opt opt)
+static void		d_link(struct dirent *f_drt, t_list **lst, char *arg, t_opt opt)
 {
 	t_list	*lst_tmp;
 
@@ -80,7 +80,7 @@ static void	d_link(struct dirent *f_drt, t_list **lst, char *arg, t_opt opt)
 			return ;
 		ft_lstadd(lst, lst_tmp);
 	}
-	else if (opt.A)
+	else if (opt.aa)
 	{
 		if (ft_strcmp(f_drt->d_name, ".")
 			&& ft_strcmp(f_drt->d_name, ".."))
@@ -100,9 +100,9 @@ static void	d_link(struct dirent *f_drt, t_list **lst, char *arg, t_opt opt)
 
 t_list			*get_data(char *arg, t_opt opt)
 {
-	DIR		*f_opn;
+	DIR				*f_opn;
 	struct dirent	*f_drt;
-	t_list		*lst;
+	t_list			*lst;
 
 	errno = 0;
 	lst = NULL;

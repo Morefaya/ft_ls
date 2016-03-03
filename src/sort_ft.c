@@ -6,7 +6,7 @@
 /*   By: jcazako <marvin@42.fr>                     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/02/23 20:18:57 by jcazako           #+#    #+#             */
-/*   Updated: 2016/02/29 22:18:31 by jcazako          ###   ########.fr       */
+/*   Updated: 2016/03/03 14:54:59 by jcazako          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -36,6 +36,7 @@ int	atime_cmp(t_ls *content_1, t_ls *content_2)
 	else
 		return (ascii_cmp(content_1, content_2));
 }
+
 int	stime_cmp(t_ls *content_1, t_ls *content_2)
 {
 	if (content_2->stime > content_1->stime)
