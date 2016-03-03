@@ -6,7 +6,7 @@
 /*   By: jcazako <marvin@42.fr>                     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/03/03 14:44:07 by jcazako           #+#    #+#             */
-/*   Updated: 2016/03/03 14:44:46 by jcazako          ###   ########.fr       */
+/*   Updated: 2016/03/03 22:13:00 by jcazako          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -20,7 +20,10 @@ char	*path_builder(char *path, char *dir_name)
 	if (!(tmp_path = ft_strjoin(path, "/")))
 		return (NULL);
 	if (!(new_path = ft_strjoin(tmp_path, dir_name)))
+	{
+		free(tmp_path);
 		return (NULL);
+	}
 	free(tmp_path);
 	return (new_path);
 }

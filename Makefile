@@ -14,9 +14,9 @@ LDIR = libft
 LIB = ft
 FILE =
 NAME = ft_ls
-.PHONY: re run rr clean fclean all $(NAME)
+.PHONY: re run rr clean fclean all
 
-all: libft.a $(NAME)
+all: $(NAME)
 
 libft.a:
 	@make re -C ./libft

@@ -6,7 +6,7 @@
 /*   By: jcazako <marvin@42.fr>                     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/02/06 20:19:34 by jcazako           #+#    #+#             */
-/*   Updated: 2016/03/03 15:20:08 by jcazako          ###   ########.fr       */
+/*   Updated: 2016/03/03 19:14:39 by jcazako          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -67,6 +67,7 @@ static t_list	*mk_link(char *arg, char *d_name)
 	}
 	if (!(lst = get_link(d_name, &buff_stat, path)))
 		return (NULL);
+	free(path);
 	return (lst);
 }
 
@@ -111,12 +112,6 @@ t_list			*get_data(char *arg, t_opt opt)
 		while ((f_drt = readdir(f_opn)))
 			d_link(f_drt, &lst, arg, opt);
 		closedir(f_opn);
-	}
-	else if (errno == ENOTDIR)
-	{
-		if (!(lst = mk_link(".", arg)))
-			return (NULL);
-		errno = ENOTDIR;
 	}
 	return (lst);
 }

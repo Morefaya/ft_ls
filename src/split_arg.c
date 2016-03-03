@@ -6,7 +6,7 @@
 /*   By: jcazako <marvin@42.fr>                     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/03/03 14:56:06 by jcazako           #+#    #+#             */
-/*   Updated: 2016/03/03 14:58:47 by jcazako          ###   ########.fr       */
+/*   Updated: 2016/03/03 21:36:46 by jcazako          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -29,11 +29,12 @@ static t_list	*mk_arg(char *av)
 
 static void		get_arg(t_list **lst_f, t_list **lst_d, char *av)
 {
+	DIR		*f_open;
 	t_list	*lst_tmp;
 
 	if (!(lst_tmp = mk_arg(av)))
 		return ;
-	if (opendir(av))
+	if ((f_open = opendir(av)))
 		ft_lstadd(lst_d, lst_tmp);
 	else if (errno == ENOTDIR)
 		ft_lstadd(lst_f, lst_tmp);
@@ -42,8 +43,9 @@ static void		get_arg(t_list **lst_f, t_list **lst_d, char *av)
 		free_content(lst_tmp->content, lst_tmp->content_size);
 		free(lst_tmp);
 		puterror(av);
-		return ;
 	}
+	if (f_open)
+		closedir(f_open);
 }
 
 void			split_arg(t_list **lst_f, t_list **lst_d, char **av, int n_av)

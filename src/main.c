@@ -6,11 +6,19 @@
 /*   By: jcazako <marvin@42.fr>                     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/02/27 13:29:48 by jcazako           #+#    #+#             */
-/*   Updated: 2016/03/03 17:46:53 by jcazako          ###   ########.fr       */
+/*   Updated: 2016/03/03 19:04:50 by jcazako          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "ft_ls.h"
+
+static void	free_arg(t_list **lst_f, t_list **lst_d)
+{
+	if (*lst_f)
+		ft_lstdel(lst_f, (void(*)(void*, size_t))free_content);
+	if (*lst_d)
+		ft_lstdel(lst_d, (void(*)(void*, size_t))free_content);
+}
 
 static void	deal_dir(t_list *lst_d, t_opt opt, int ac, int index)
 {
@@ -52,6 +60,7 @@ int			main(int ac, char **av)
 			ft_putchar('\n');
 		opt.lf_dir = 1;
 		deal_dir(lst_d, opt, ac, index);
+		free_arg(&lst_f, &lst_d);
 	}
 	return (0);
 }

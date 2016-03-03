@@ -6,7 +6,7 @@
 /*   By: jcazako <marvin@42.fr>                     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/02/24 18:16:15 by jcazako           #+#    #+#             */
-/*   Updated: 2016/03/03 14:49:07 by jcazako          ###   ########.fr       */
+/*   Updated: 2016/03/03 21:59:26 by jcazako          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -76,6 +76,9 @@ void			print_ls(t_list *lst)
 	while (max_w * nb_col < ws.ws_col)
 		nb_col++;
 	nb_col--;
-	nb_lgn = width / nb_col + 1;
+	if (nb_col)
+		nb_lgn = width / nb_col + 1;
+	else
+		nb_lgn = 1;
 	split_ls(lst, nb_lgn, max_w);
 }
