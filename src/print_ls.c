@@ -6,7 +6,7 @@
 /*   By: jcazako <marvin@42.fr>                     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/02/24 18:16:15 by jcazako           #+#    #+#             */
-/*   Updated: 2016/03/03 21:59:26 by jcazako          ###   ########.fr       */
+/*   Updated: 2016/03/04 21:32:27 by jcazako          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -22,6 +22,8 @@ static int		get_colwidth(t_list *lst)
 
 static t_list	*get_next_link(t_list *lst, int nb_col)
 {
+	if (!nb_col)
+		return (NULL);
 	while (nb_col--)
 	{
 		if (!lst)
@@ -54,31 +56,31 @@ static void		split_ls(t_list *lst, int nb_lgn, int max_w)
 	}
 }
 
-void			print_ls(t_list *lst)
+void			print_ls(t_list *lst, t_opt opt)
 {
 	struct winsize	ws;
 	int				nb_col;
-	int				max_w;
-	int				width;
 	int				nb_lgn;
+	int				max_w;
 
 	if (!lst)
 		return ;
 	nb_col = 1;
-	errno = 0;
+	nb_lgn = 1;
 	if ((ioctl(1, TIOCGWINSZ, &ws) == -1))
 	{
 		ft_putendl(strerror(errno));
 		return ;
 	}
-	max_w = get_colwidth(lst);
-	width = count_elem_list(lst);
-	while (max_w * nb_col < ws.ws_col)
-		nb_col++;
-	nb_col--;
-	if (nb_col)
-		nb_lgn = width / nb_col + 1;
-	else
-		nb_lgn = 1;
+	if ((max_w = get_colwidth(lst)))
+		nb_col = ws.ws_col / max_w;
+	if (nb_col == 1)
+	{
+		opt.one = 1;
+		print_one(lst, opt);
+		return ;
+	}
+	if (nb_col > 0)
+		nb_lgn = count_elem_list(lst) / nb_col + 1;
 	split_ls(lst, nb_lgn, max_w);
 }

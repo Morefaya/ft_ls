@@ -6,7 +6,7 @@
 /*   By: jcazako <marvin@42.fr>                     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/02/06 21:28:40 by jcazako           #+#    #+#             */
-/*   Updated: 2016/03/03 17:45:03 by jcazako          ###   ########.fr       */
+/*   Updated: 2016/03/04 20:21:56 by jcazako          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -100,7 +100,7 @@ void			print(t_list *lst, t_opt opt);
 
 void			print_one(t_list *lst, t_opt opt);
 
-void			print_ls(t_list *lst);
+void			print_ls(t_list *lst, t_opt opt);
 
 void			print_lf(t_list *lst, t_opt opt);
 

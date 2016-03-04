@@ -16,10 +16,13 @@ FILE =
 NAME = ft_ls
 .PHONY: re run rr clean fclean all
 
-all: $(NAME)
+all: libft/libft.a $(NAME)
 
-libft.a:
-	@make re -C ./libft
+libft/libft.a:
+	@make -C ./libft
+
+fclean_lib:
+	@make fclean -C ./libft
 
 $(NAME): $(OBJ_O)
 	@$(CC) -o $@ -I $(HDIR) -l $(LIB) -L $(LDIR) $(OBJ_O) $(CFLAG)
@@ -36,7 +39,7 @@ fclean: clean
 	@rm -rf $(NAME)
 	@echo "\033[31mft_ls removed\033[0m"
 
-re: fclean all
+re: fclean fclean_lib all
 
 run:
 	@./$(NAME) $(FILE) | cat -e
